@@ -1,0 +1,4 @@
+User-agent: *
+Crawl-delay: 3600
+Disallow: /
+Disallow: /writer/

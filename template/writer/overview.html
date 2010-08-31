@@ -1,0 +1,44 @@
+{% include 'header.html' %}
+
+<div id="bd">
+    <div class="yui-ge">
+        <div id="main" class="yui-u first">
+            <div class="sp"></div>
+            <div class="cell">
+                <span class="fade">
+                    <a href="/writer/">Writer</a> <span class="chevron">&nbsp;›&nbsp;</span> 最近发布的文章
+                </span>
+                <span class="right">
+                    <a href="/writer/new/">新文章</a>
+                </span>
+            </div>
+
+            {% if entries %}
+            <table id="entries" width="95%" cellspacing="0" cellpadding="5" border="0">
+                <tbody>
+                {% for entry in entries %}
+                <tr class="{% if (entries.index(entry)%2 == 0) %}odd{% else %}even{% end %}">
+                    <td class="title">
+                        <a href="/writer/update/{{ entry.id }}">{{ entry.title }}</a><br />
+                        {% for tag in entry.tags %}
+                        <small class="tag">{{ tag }}</small>
+                        {% end %}
+                    </td>
+                    <td class="created"><span>{{ locale.format_time(entry.created, gmt_offset=-8*60) }}</span></td>
+                    <td class="remove"><span><a href="/writer/remove/{{ entry.id }}">X</a></span></td>
+                </tr>
+                {% end %}
+                </tbody>
+            </table>
+            {% end %}
+
+            <div class="sp"></div>
+        </div>
+
+        {% include 'sidebar.html' %}
+
+    </div>
+</div>
+<div class="sp"></div>
+
+{% include 'footer.html' %}

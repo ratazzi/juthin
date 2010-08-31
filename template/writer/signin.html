@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8" />
+        <title>{{ escape(handler.settings['blog_title']) }}</title>
+        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+        <meta name="HandheldFriendly" content="True" />
+        <link rel="alternate" type="application/rss+xml" title="{{ escape(handler.settings['blog_title']) }}" href="feed://feeds.feedburner.com/ratazzi" />
+        <link rel="stylesheet" href="/static/reset-fonts-grids.css" type="text/css">
+        <link rel="stylesheet" href="/static/writer.css" type="text/css">
+        <link rel="stylesheet" href="/static/signin.css" type="text/css">
+        <link href="http://www.ratazzi.org/images/s/favicon.ico" rel="shortcut icon" />
+    </head>
+
+    <body>
+        <div id="main">
+            <div id="wizard">Writer</div>
+
+            <div id="account">
+                <form name="u" action="/writer/signin/" method="post">
+                    <label>用户名</label><br />
+                    <input class="text" name="user" type="text" value="" /><br />
+                    <label>密码</label><br />
+                    <input class="text" name="passwd" type="password" value="" /><br />
+                    <input class="button" type="submit" value="登录" />
+                </form>
+            </div>
+
+        </div>
+    </body>
+
+</html>

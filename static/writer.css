@@ -1,0 +1,136 @@
+div#main {
+    width:68%;
+}
+
+div#tweet, div#tooltip {
+    width:28%;
+    padding:10px;
+}
+
+div#tooltip li {
+    list-style:square;
+    display:block;
+    height:20px;
+    line-height:160%;
+    color:#333;
+}
+
+div.cell {
+    padding:5px 10px 5px 10px;
+    border-bottom:1px solid #ccc;
+    margin-bottom:15px;
+}
+
+span.right {
+    float:right;
+}
+
+form#post {
+    padding:0 10px 0 10px;
+}
+
+form#post label {
+    padding-bottom:10px;
+    font-size:14px;
+}
+
+input.text {
+    height:24px;
+}
+
+textarea, input.text {
+    border:1px solid #ccc;
+    -moz-border-radius:3px 3px 3px 3px;
+    -webkit-border-radius:3px 3px 3px 3px;
+    width:98.5%;
+    line-height:120%;
+    padding:3px;
+    margin-bottom:15px;
+    margin-top:5px;
+    font-size:14px;
+    font-family:"Panic Sans","Menlo","DejaVu Sans Mono","Helvetica Neue","Luxi Sans","DejaVu Sans",Tahoma,"Hiragino Sans GB",STHeiti !important;
+}
+
+textarea:focus, input.text:focus {
+    -moz-box-shadow:0 0 5px rgba(128, 128, 160, 0.5);
+    -webkit-box-shadow:0 0 5px rgba(128, 128, 160, 0.5);
+    border:1px solid #CCCCCC;
+}
+
+input.super, input.button {
+    background-image: url("../static/bg_blended.png"); 
+    padding: 4px 15px 4px 15px; 
+    border: 1px solid rgba(0,0,0,.25); 
+    border-bottom-color: rgba(0,0,0,.35); 
+    -webkit-border-radius: 5px; 
+    -moz-border-radius: 5px; 
+    border-radius: 5px; 
+    font-size: 12px; 
+    line-height: 12px; 
+    outline: none; 
+}
+
+input.normal, input.button { 
+    background-color: #f5f5f5; 
+    color: #333; 
+    text-shadow: 0px 1px 1px #fff; 
+    text-decoration: none; 
+    font-weight: bold; 
+    -moz-box-shadow: 0px 1px 3px rgba(66, 66, 77, 0.4); 
+    -webkit-box-shadow: 0px 1px 3px rgba(66, 66, 77, 0.4); 
+}
+
+input.normal:hover, input.button:hover { 
+    background-color: #fff; 
+    color: #333; 
+    text-shadow: 0px 1px 1px #fff; 
+    text-decoration: none; 
+    text-decoration: none; 
+    font-weight: bold; 
+    cursor: pointer; 
+    -webkit-box-shadow: 0px 1px 2px rgba(66, 66, 77, 0.2); 
+}
+
+input.normal:active, input.button:active { 
+    background-color: #e2e2e2; 
+    color: #333; 
+    text-shadow: 0px 1px 1px #fff; 
+    text-decoration: none; 
+    text-decoration: none; 
+    font-weight: bold; 
+    cursor: pointer; 
+    -moz-box-shadow: 0px 1px 2px rgba(66, 66, 77, 0.2); 
+}
+
+table#entries {
+    margin:10px;
+}
+
+table#entries tr {
+    height:48px;
+}
+
+table#entries tr.even {
+    background-color:#f9F9F9;
+}
+
+td.title {
+    padding-left:5px;
+}
+
+td.title {
+    width:76%;
+}
+
+td.created {
+    width:20%;
+    color:#999;
+}
+
+td.remove {
+    width:3%;
+}
+
+small.tag {
+    color:#999;
+}

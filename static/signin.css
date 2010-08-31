@@ -1,0 +1,47 @@
+html{
+    background-color:#e2e2e2; 
+}
+
+div#main{
+    width:400px;
+    height:240px;
+    margin:0 auto;
+    margin-top:80px;
+    text-align:left;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    -moz-box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);
+    border:1px solid #ccc;
+    background-color:#fff;
+    padding:25px;
+}
+
+div#wizard {
+    font-size:16px;
+    font-weight:bold;
+}
+
+form#new, div#account {
+    margin:15px 0px 15px 0px;
+    line-height:160%;
+}
+
+form#new em {font-size:12px;}
+
+label {
+    font-weight:bold;
+    font-size:16px;
+}
+
+div#account input {
+    margin-bottom:24px;
+}
+
+#submit, div#account input.signin {
+    font-size:14px;
+    width:68px;
+    height:36px;
+    padding:5px;
+    font-weight:bold;
+    color:#084874;
+}
