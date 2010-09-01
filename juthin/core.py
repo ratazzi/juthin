@@ -16,11 +16,17 @@ class Entry(db.Model):
 class Author(db.Model):
     id = db.IntegerProperty()
     name = db.StringProperty()
-    nickname = db.IntegerProperty()
+    nickname = db.StringProperty()
     passwd = db.StringProperty()
     description = db.StringProperty()
-    url = db.StringProperty()
     lastlogin = db.IntegerProperty()
+    blog_title = db.StringProperty()
+    blog_theme = db.StringProperty()
+    blog_domain = db.StringProperty()
+    blog_timezone = db.IntegerProperty()
+    twitter_user = db.StringProperty()
+    twitter_passwd = db.StringProperty()
+    sync_key = db.StringProperty()
 
 class Tags:
     def __init__(self):
@@ -53,20 +59,3 @@ class Tags:
                     cloud.append(tag)
         memcache.add('cloud', simplejson.dumps(cloud), 3600 * 24)
         return cloud
-
-class Helper:
-    def __init__(self):
-        pass
-
-    def format_date(self, date):
-        return datetime.fromtimestamp(date, tzinfo=GMT8).strftime('%d-%b-%Y %H:%M')
-
-class GMT8(tzinfo):
-    def utcoffset(self, dt):
-        return timedelta(hours=5,minutes=30)
-
-    def tzname(self, dt):
-        return 'GMT +8'
-
-    def dst(self, dt):
-        return timedelta(0)

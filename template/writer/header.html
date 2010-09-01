@@ -3,8 +3,8 @@
     <head>
         <meta charset="utf-8" />
         <title>{{ escape(handler.settings["blog_title"]) }}</title>
-        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
-        <meta name="HandheldFriendly" content="True" />
+        <!--<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+        <meta name="HandheldFriendly" content="True" />-->
         <link rel="alternate" type="application/rss+xml" title="{{ escape(handler.settings['blog_title']) }}" href="feed://feeds.feedburner.com/ratazzi" />
         <link rel="stylesheet" href="/static/reset-fonts-grids.css" type="text/css">
         <link rel="stylesheet" href="/static/x.css" type="text/css">
@@ -15,6 +15,11 @@
     <body>
         <div id="doc" class="yui-t7">
             <div id="header">
-                <a href="http://{{ request.host }}/" class="img"><h1>{{ escape(handler.settings['blog_title']) }}</h1></a>
+                <a href="/" class="img"><h1>{{ escape(handler.settings['blog_title']) }}</h1></a>
+                <div class="nav">
+                    <a href="/writer/">Writer</a><span class="chevron">&nbsp;&nbsp;</span>
+                    <a href="/writer/settings/">设置</a><span class="chevron">&nbsp;&nbsp;</span>
+                    <a href="/writer/signout/">登出</a>
+                </div>
             </div>
             <div class="sp"></div>

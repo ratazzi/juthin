@@ -1,0 +1,57 @@
+{% include 'header.html' %}
+
+<div id="bd">
+    <div class="yui-ge">
+        <div id="main" class="yui-u first">
+            <div id="settings" class="block settings">
+                <div class="sp"></div>
+                <div class="cell">
+                    <span class="fade">
+                        <a href="/writer/">Writer</a> <span class="chevron">&nbsp;›&nbsp;</span> 设置 
+                    </span>
+                </div>
+                <form id="post" action="/writer/settings/" method="post">
+                    <label>博客标题</label>
+                    <input class="text" name="blog_title" type="text" value="{% if author %}{{ author.blog_title }}{% end %}" /><br />
+                    <label>博客主题</label>
+                    <input class="text" name="blog_theme" type="text" value="{% if author %}{{ author.blog_theme }}{% end %}" /><br />
+                    <label>域名</label>
+                    <input class="text" name="blog_domain" type="text" value="{% if author %}{{ author.blog_domain }}{% end %}" /><br />
+                    <label>时区</label>
+                    <input class="text" name="blog_timezone" type="text" value="{% if author %}{{ author.blog_timezone }}{% end %}" /><br />
+                    <label>Sync Key</label>
+                    <input class="text" name="sync_key" type="text" value="{% if author %}{{ author.sync_key }}{% end %}" /><br />
+                    <label>Twitter 用户名</label>
+                    <input class="text" name="twitter_user" type="text" value="{% if author %}{{ author.twitter_user }}{% end %}" /><br />
+                    <label>Twitter 密码</label>
+                    <input class="text" name="twitter_passwd" type="password" value="{% if author %}{{ author.twitter_passwd }}{% end %}" /><br />
+                    <label></label>
+                    <input type="submit" class="super normal button" value="保存">
+                </form>
+                <div class="sp"></div>
+            </div>
+            <div id="passwd" class="block settings">
+                <div class="sp"></div>
+                <div class="cell">
+                    <span class="fade">
+                        <a href="/writer/">Writer</a> <span class="chevron">&nbsp;›&nbsp;</span> 更改密码<small>（不更改请留空）</small> 
+                    </span>
+                </div>
+                <form id="post" action="/writer/passwd/" method="post">
+                    <label>新密码</label>
+                    <input class="text" name="new_passwd" type="password" value="" /><br />
+                    <label>确认密码</label>
+                    <input class="text" name="confirm" type="password" value="" /><br />
+                    <label></label>
+                    <input type="submit" class="super normal button" value="更改密码">
+                </form>
+                <div class="sp"></div>
+            </div>
+        </div>
+
+        {% include 'sidebar.html' %}
+
+    </div>
+</div>
+
+{% include 'footer.html' %}

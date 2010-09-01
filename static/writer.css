@@ -1,9 +1,31 @@
 div#main {
-    width:68%;
+    width:69%;
+    border:none;
+    background:none;
+    -moz-border-radius:none;
+    -webkit-border-radius:none;
+    -moz-box-shadow:none;
+    -webkit-box-shadow:none;
+}
+
+div#sidebar {
+    width:30%;
+}
+
+div.block {
+    margin-bottom:10px;
+}
+
+div.block, div#footer, div#header {
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    -moz-box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);
+    border:1px solid #ccc;
+    background-color:#fff;
 }
 
 div#tweet, div#tooltip {
-    width:28%;
     padding:10px;
 }
 
@@ -55,6 +77,23 @@ textarea:focus, input.text:focus {
     -moz-box-shadow:0 0 5px rgba(128, 128, 160, 0.5);
     -webkit-box-shadow:0 0 5px rgba(128, 128, 160, 0.5);
     border:1px solid #CCCCCC;
+}
+
+div#tweet textarea {
+    width:97%;
+}
+
+div.settings input.text, div.settings input.submit {
+    height:20px;
+    width:50%;
+}
+
+div.settings label {
+    display:block;
+    width:20%;
+    float:left;
+    padding:10px 10px 0px 0px;
+    text-align:right;
 }
 
 input.super, input.button {

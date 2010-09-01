@@ -335,7 +335,7 @@ class Locale(object):
     def format_time(self, date, gmt_offset=0):
         if type(date) in (int, long, float):
             date = datetime.datetime.utcfromtimestamp(date)
-        local_date = date - datetime.timedelta(minutes=gmt_offset)
+        local_date = date + datetime.timedelta(hours=gmt_offset)
         return datetime.datetime.strftime(local_date, '%d-%b-%Y %H:%M')
 
     def list(self, parts):

@@ -3,28 +3,29 @@
 <div id="bd">
     <div class="yui-ge">
         <div id="main" class="yui-u first">
-            <div class="sp"></div>
-            <div class="cell">
-                <span class="fade">
-                    <a href="/writer/">Writer</a> <span class="chevron">&nbsp;›&nbsp;</span> 新文章
-                </span>
+            <div class="block">
+                <div class="sp"></div>
+                <div class="cell">
+                    <span class="fade">
+                        <a href="/writer/">Writer</a> <span class="chevron">&nbsp;›&nbsp;</span> 编辑
+                    </span>
+                </div>
+                <form id="post" action="/writer/update/{{ entry.id }}" method="post">
+                    <label>标题</label><br />
+                    <input class="text" name="title" type="text" value="{{ entry.title }}" /><br />
+                    <label>标签<small>（用英文逗号隔开）</small></label><br />
+                    <input class="text" name="tags" type="text" value="{% for tag in entry.tags %}{{ tag }}{% if tag != entry.tags[-1] %},{% end %}{% end %}" /><br />
+                    <label>内容</label><br />
+                    <textarea name="content" rows="20" cols="70">{{ entry.content }}</textarea>
+                    <input type="submit" class="super normal button" value="保存">
+                </form>
+                <div class="sp"></div>
             </div>
-            <form id="post" action="/writer/update/{{ entry.id }}" method="post">
-                <label>标题</label><br />
-                <input class="text" name="title" type="text" value="{{ entry.title }}" /><br />
-                <label>标签<small>（用英文逗号隔开）</small></label><br />
-                <input class="text" name="tags" type="text" value="{% for tag in entry.tags %}{{ tag }}{% if tag != entry.tags[-1] %},{% end %}{% end %}" /><br />
-                <label>内容</label><br />
-                <textarea name="content" rows="20" cols="70">{{ entry.content }}</textarea>
-                <input type="submit" class="super normal button" value="保存">
-            </form>
-            <div class="sp"></div>
         </div>
 
         {% include 'sidebar.html' %}
 
     </div>
 </div>
-<div class="sp"></div>
 
 {% include 'footer.html' %}

@@ -17,6 +17,13 @@ div#header{
     padding:10px;
 }
 
+div#header div.nav {
+    width:35%;
+    float:right;
+    text-align:right;
+    margin-right:35px;
+}
+
 div#header h1{
     font-size:42px;
     font-weight:bold;
@@ -34,6 +41,7 @@ div.gist-file{
     -moz-border-radius:4px 4px 4px 4px;
     -webkit-border-radius:4px 4px 4px 4px;
     -moz-box-shadow:0 1px 5px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow:0 1px 5px rgba(0, 0, 0, 0.1);
 }
 
 a{color:#0063dc; color:#cc6699; text-decoration:none;}
@@ -60,6 +68,7 @@ div#main, div.sidebar, div#footer, div#header {
     -moz-border-radius:5px;
     -webkit-border-radius:5px;
     -moz-box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);
     border:1px solid #ccc;
     background-color:#fff;
 }

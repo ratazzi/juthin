@@ -1,5 +1,5 @@
-application: juthin
-version: 5
+application: app_id
+version: 1
 runtime: python
 api_version: 1
 
@@ -10,6 +10,9 @@ handlers:
 
 - url: /static
   static_dir: static
+
+- url: /init/
+  script: init.py
 
 - url: /writer/.*
   script: writer.py

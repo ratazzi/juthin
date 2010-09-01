@@ -8,7 +8,7 @@
         <h3>Tags</h3>
         <ul>
             {% for cloud in clouds %}
-            <li><a href="http://{{ request.host }}/tags/{{ escape(cloud) }}">{{ escape(cloud) }}</a></li>
+            <li><a href="/tags/{{ escape(cloud) }}">{{ escape(cloud) }}</a></li>
             {% end %}
         </ul>
         </li>

@@ -6,15 +6,15 @@
             <div class="sp"></div>
             {% for entry in entries %}
             <div class="post">
-                <h2 class="entry-title"><a rel="bookmark" title="{{ escape(entry.title) }}" href="http://{{ request.host }}/view/{{ entry.id }}.html" class="t">{{ escape(entry.title) }}</a></h2>
+                <h2 class="entry-title"><a rel="bookmark" title="{{ escape(entry.title) }}" href="/view/{{ entry.id }}.html" class="t">{{ escape(entry.title) }}</a></h2>
                 <div class="entry-content">
                     {{ entry.content }}
                 </div>
                 <div class="entry-meta">
-                    <span class="author vcard">Posted by {{ handler.settings['author'] }} on {{ locale.format_time(entry.created, gmt_offset=-60*8) }}</span><br>
+                    <span class="author vcard">Posted by {{ handler.settings['blog_author'] }} on {{ locale.format_time(entry.created, gmt_offset=handler.settings['blog_timezone']) }}</span><br>
                     <span class="tag-links">Tags: 
                         {% for tag in entry.tags %}
-                        <a rel="tag" href="http://{{ request.host }}/tags/{{ tag }}">{{ tag }}</a>{% if tag != entry.tags[-1] %},&nbsp;{% end %}
+                        <a rel="tag" href="/tags/{{ tag }}">{{ tag }}</a>{% if tag != entry.tags[-1] %},&nbsp;{% end %}
                         {% end %}
                     </span>
                 </div>

@@ -5,16 +5,16 @@
         <div id="main" class="yui-u first">
             <div class="sp"></div>
             <div class="post">
-                <h2 class="entry-title"><a rel="bookmark" title="{{ escape(entry.title) }}" href="http://{{ request.host }}/view/{{ entry.id }}.html" class="t">{{ escape(entry.title) }}</a></h2>
+                <h2 class="entry-title"><a rel="bookmark" title="{{ escape(entry.title) }}" href="/view/{{ entry.id }}.html" class="t">{{ escape(entry.title) }}</a></h2>
                 <div class="entry-content">
                     {{ entry.content }}
                 </div>
                 <div class="entry-meta">
-                    <span class="author vcard">Posted by on {{ locale.format_time(entry.created, gmt_offset=-8*60) }}</span><br>
+                    <span class="author vcard">Posted by {{ handler.settings['blog_author'] }} on {{ locale.format_time(entry.created, gmt_offset=handler.settings['blog_timezone']) }}</span><br>
                     {% if entry.tags %}
                     <span class="tag-links">Tags: 
                         {% for tag in entry.tags %}
-                        <a rel="tag" href="http://{{ request.host }}/tags/{{ escape(tag) }}">{{ escape(tag) }}</a>{% if tag != entry.tags[-1] %},&nbsp;{% end %}
+                        <a rel="tag" href="/tags/{{ escape(tag) }}">{{ escape(tag) }}</a>{% if tag != entry.tags[-1] %},&nbsp;{% end %}
                         {% end %}
                     </span>
                     {% end %}
@@ -26,7 +26,7 @@
                 <h2 class="entry-title">Related Post:</h2><br>
                 <ul class="related">
                     {% for item in related %}
-                    <li><a href="http://www.ratazzi.org/view/{{ item.id }}.html" class="p">{{ item.title }}</a></li>
+                    <li><a href="/view/{{ item.id }}.html" class="p">{{ item.title }}</a></li>
                     {% end %}
                 </ul>
             </div>
