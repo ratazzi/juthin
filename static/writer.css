@@ -25,7 +25,7 @@ div.block, div#footer, div#header {
     background-color:#fff;
 }
 
-div#tweet, div#tooltip {
+div#tweet, div#tooltip, div#link_twitter {
     padding:10px;
 }
 

@@ -15,9 +15,13 @@ import hashlib
 from tornado.options import define, options
 from google.appengine.ext import db
 from django.utils import simplejson
+from google.appengine.api import memcache
 
 from juthin.core import Entry, Tags, Author
-from juthin import twitter
+
+from twitter.oauthtwitter import OAuthApi
+from twitter.oauth import OAuthToken
+import config
 
 class BaseHandler(tornado.web.RequestHandler):
     @property
@@ -31,17 +35,20 @@ class BaseHandler(tornado.web.RequestHandler):
         else:
             return True
 
+    def get_author(self):
+        return Author.all().get()
+
 class OverviewHandler(BaseHandler):
     @tornado.web.signin
     def get(self):
         rs = db.GqlQuery('SELECT * FROM Entry ORDER BY created DESC LIMIT 25')
         entries = rs.fetch(25)
-        self.render('overview.html', entries=entries)
+        self.render('overview.html', entries=entries, author=self.get_author())
 
 class NewHandler(BaseHandler):
     @tornado.web.signin
     def get(self):
-        self.render('new.html')
+        self.render('new.html', author=self.get_author())
 
     @tornado.web.signin
     def post(self):
@@ -65,7 +72,7 @@ class UpdateHandler(BaseHandler):
     def get(self, id):
         rs = db.GqlQuery('SELECT * FROM Entry WHERE id = :1', int(id))
         entry = rs.get()
-        self.render('update.html', entry=entry)
+        self.render('update.html', entry=entry, author=self.get_author())
 
     @tornado.web.signin
     def post(self, id):
@@ -85,16 +92,58 @@ class RemoveHandler(BaseHandler):
         rs = db.GqlQuery('SELECT * FROM Entry WHERE id = :1', int(id))
         entry = rs.get()
         db.delete(entry)
-        self.redirect('/writer/')
+        self.redirect('/writer/', author=self.get_author())
 
 class TwitterHandler(BaseHandler):
     @tornado.web.signin
     def post(self):
         status = self.get_argument('status')
         author = Author.all().get()
-        api = twitter.Api(username=author.twitter_user, password=author.twitter_passwd)
-        api.PostUpdate(status)
+        if author.twitter_oauth == 1:
+            access_token = OAuthToken.from_string(author.twitter_oauth_string)
+            twitter = OAuthApi(config.CONSUMER_KEY, config.CONSUMER_SECRET, access_token)
+            try:
+                twitter.PostUpdate(status.encode('utf-8'))
+            except:
+                logging.error('Failed to tweet: ' + status)
         self.redirect('/writer/')
+
+class TwitterLinkHandler(BaseHandler):
+    @tornado.web.signin
+    def get(self):
+        twitter = OAuthApi(config.CONSUMER_KEY, config.CONSUMER_SECRET)
+        request_token = twitter.getRequestToken()
+        authorization_url = twitter.getAuthorizationURL(request_token)
+        memcache.delete('request_token')
+        memcache.add('request_token', request_token, 3600)
+        self.redirect(authorization_url)
+
+class TwitterCallbackHandler(BaseHandler):
+    @tornado.web.signin
+    def get(self):
+        request_token = memcache.get('request_token')
+        twitter = OAuthApi(config.CONSUMER_KEY, config.CONSUMER_SECRET, request_token)
+        access_token = twitter.getAccessToken()
+        twitter = OAuthApi(config.CONSUMER_KEY, config.CONSUMER_SECRET, access_token)
+        user = twitter.GetUserInfo()
+        author = Author.all().get()
+        author.twitter_oauth = 1
+        author.twitter_oauth_key = access_token.key
+        author.twitter_oauth_secret = access_token.secret
+        author.twitter_oauth_string = access_token.to_string()
+        author.twitter_id = int(user.id)
+        author.twitter_name = user.name
+        author.twitter_screen_name = user.screen_name
+        author.twitter_location = user.location
+        author.twitter_description = user.description
+        author.twitter_profile_image_url = user.profile_image_url
+        author.twitter_url = user.url
+        author.twitter_statuses_count = user.statuses_count
+        author.twitter_followers_count = user.followers_count
+        author.twitter_friends_count = user.friends_count
+        author.twitter_favourites_count = user.favourites_count
+        author.put()
+        self.redirect('/writer/settings/')
 
 class SettingsHandler(BaseHandler):
     @tornado.web.signin
@@ -102,6 +151,7 @@ class SettingsHandler(BaseHandler):
         author = Author.all().get()
         self.render('settings.html', author=author)
 
+    @tornado.web.signin
     def post(self):
         author = Author.all().get()
         if not author:
@@ -190,6 +240,8 @@ class Application(tornado.wsgi.WSGIApplication):
             (r"/writer/signin/", SigninHandler),
             (r"/writer/signout/", SignoutHandler),
             (r"/twitter/tweet/", TwitterHandler),
+            (r"/twitter/link/", TwitterLinkHandler),
+            (r"/oauth/twitter/callback/", TwitterCallbackHandler),
             (r"/entry/sync/", EntrySyncHandler),
         ]
         author = Author.all().get()
@@ -204,6 +256,7 @@ class Application(tornado.wsgi.WSGIApplication):
             #xsrf_cookies = True,
             cookie_secret = "11oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o/Vo=",
             login_url = "/writer/signin/",
+            debug = True,
         )
         tornado.wsgi.WSGIApplication.__init__(self, handlers, **settings)
 

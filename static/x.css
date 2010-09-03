@@ -17,6 +17,10 @@ div#header{
     padding:10px;
 }
 
+div#header a.img {
+    float:left;
+}
+
 div#header div.nav {
     width:35%;
     float:right;
@@ -60,11 +64,16 @@ div.sidebar{
     margin-bottom:15px;
 }
 
-div#sidebar {
-    width:21%;
+div#main {
+    *width:73%;
 }
 
-div#main, div.sidebar, div#footer, div#header {
+div#sidebar {
+    width:22.8%;
+    *width:21%;
+}
+
+div#main, div.sidebar, div#footer, div#header, div#error {
     -moz-border-radius:5px;
     -webkit-border-radius:5px;
     -moz-box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);
@@ -82,6 +91,7 @@ div.sidebar li li{
 }
 #rss-links{margin-bottom:10px;}
 #hosted{
+    margin-top:8px;
     font-size:14px;
     font-weight:bold;
 }
@@ -262,4 +272,20 @@ pre{
   overflow-y: hidden;
   padding-bottom: expression(this.scrollWidth > this.offsetWidth ? 15 : 0);
   width: 100%;
+}
+
+div#error {
+    margin:0 auto;
+    width:360px;
+    height:140px;
+    margin-top:240px;
+    padding:35px;
+}
+
+div#error h1 {
+    font-family: "Courier New",monospace,Consolas,Lucida Console;
+    font-size:24px;
+    color:#476AB2;
+    font-weight:bold;
+    margin-top:36px;
 }

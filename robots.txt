@@ -1,4 +1,8 @@
 User-agent: *
 Crawl-delay: 3600
-Disallow: /
 Disallow: /writer/
+Disallow: /twitter/
+Disallow: /init/
+Disallow: /entry/
+
+Sitemap: http://www.ratazzi.org/sitemap.xml

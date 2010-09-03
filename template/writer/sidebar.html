@@ -1,4 +1,5 @@
 <div id="sidebar" class="yui-u">
+    {% if author.twitter_oauth == 1 %}
     <div id="tweet" class="block">
         <ul class="xoxo">
             <div class="inner">
@@ -6,9 +7,9 @@
                 <table width="100%" cellspacing="0" cellpadding="0" border="0">
                     <tbody>
                         <tr>
-                            <td width="48" valign="top"><a href="/member/ratazzi"><img border="0" alt="ratazzi" src="http://web.me.com/v2ex.livid/v2ex/avatars/14/normal/107.png?r=1281170863"></a></td>
+                            <td width="48" valign="top"><a href="{{ author.twitter_url }}"><img border="0" alt="ratazzi" src="{{ author.twitter_profile_image_url }}"></a></td>
                             <td width="10" valign="top"></td>
-                            <td width="auto" align="left"><span class="bigger"><a href="/member/ratazzi">ratazzi</a></span>
+                            <td width="auto" align="left"><span class="bigger"><a href="{{ author.twitter_url }}">{{ author.twitter_name }}</a></span>
                                 <div class="sep5"></div>
                                 <span class="fade"></span>
                             </td>
@@ -26,12 +27,28 @@
             </div>
         </ul>
     </div>
+    {% end %}
+
+    {% if author.twitter_oauth != 1 %}
+    <div id="link_twitter" class="block">
+        <div class="cell">
+            <span class="fade">
+                <span class="chevron">Twitter</span>
+            </span>
+        </div>
+        <div class="sp"></div>
+        <input type="button" class="super normal button" value="Link My Twitter Account" onclick="location.href = '/twitter/link/'" />
+        <br /><br /><small>通过 OAuth 绑定 Twitter 帐号可以使用 Twitter 相关功能。</small>
+        <div class="sp"></div>
+    </div>
+    {% end %}
+
     <div id="tooltip" class="block">
         <ul>
             <li>支持 HTML 与 Markdown</li>
             <li>支持 Github Gist，插入网址即可</li>
             <li>支持 img.ly，链接会自动转换为图片</li>
-            <li id="hosted">Hosted by <a target="_blank" href="http://www.linode.com/">Linode</a></li>
+            <li id="hosted"><a target="_blank" href="http://code.google.com/appengine/"><img border="0" align="absmiddle" alt="Powered by Google App Engine" src="http://pic.yupoo.com/iweekly/Ar82qEas/MV2Mq.gif"></a></li>
         </ul>
     </div>
 </div>

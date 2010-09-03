@@ -1,4 +1,5 @@
-#!/usr/bin/python2.4
+#!/usr/bin/python2.5
+# coding=utf-8
 #
 # Copyright 2007 Google Inc. All Rights Reserved.
 #
@@ -18,6 +19,7 @@
 
 __author__ = 'dewitt@google.com'
 __version__ = '0.6-devel'
+
 TWITTER_API_ROOT = 'http://twitter.com/'
 
 from django.utils import simplejson
@@ -36,6 +38,7 @@ import urlparse
 import re
 import bitly
 import hashlib
+import logging
 
 try:
   from google.appengine.api import memcache
@@ -50,8 +53,6 @@ except ImportError:
 
 CHARACTER_LIMIT = 140
 
-if os.environ['HTTP_HOST'].find('localhost') != -1:
-  TWITTER_API_ROOT = 'http://li2z.cn/t/'
 
 class TwitterError(Exception):
   '''Base class for Twitter errors'''
@@ -1458,7 +1459,7 @@ class Api(object):
     url = TWITTER_API_ROOT + 'account/rate_limit_status.json'
     json = self._FetchUrl(url)
     data = simplejson.loads(json)
-    return data['remaining_hits']
+    return data
     
   def GetListTimeline(self,
                       user=None,
@@ -1486,7 +1487,7 @@ class Api(object):
       A sequence of twitter.Status instances, one for each message
     '''
     if user:
-      url = TWITTER_API_ROOT + '1/' + user + '/lists/' + list_id + '/statuses.json'
+      url = TWITTER_API_ROOT + '/' + user + '/lists/' + list_id + '/statuses.json'
     elif not user and not self._username:
       raise TwitterError("User must be specified if API is not authenticated.")
     else:
@@ -1541,7 +1542,7 @@ class Api(object):
     return [Status.NewFromJsonDict(x) for x in data]
 
   def GetLists(self):
-    url = TWITTER_API_ROOT + '1/' + self._username + '/lists.json'
+    url = TWITTER_API_ROOT + '/' + self._username + '/lists.json'
     json = self._FetchUrl(url)
     data = simplejson.loads(json)
     lists = []
@@ -1622,7 +1623,7 @@ class Api(object):
 
     url = TWITTER_API_ROOT + 'statuses/update.json'
 
-    if len(status) > CHARACTER_LIMIT:
+    if len(status.decode('utf-8')) > CHARACTER_LIMIT:
       raise TwitterError("Text must be less than or equal to %d characters. "
                          "Consider using PostUpdates." % CHARACTER_LIMIT)
 

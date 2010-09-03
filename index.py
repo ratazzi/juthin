@@ -39,6 +39,9 @@ class ViewHandler(BaseHandler):
         rs = db.GqlQuery('SELECT * FROM Entry WHERE id = :1', id)
         mapping = Tags().mapping()
         entry = rs.get()
+        if not entry:
+            self.redirect('/error/')
+            return
         ids = []
         for tags in entry.tags:
             if tags in mapping:
@@ -60,10 +63,17 @@ class TagsHandler(BaseHandler):
         if tag in mapping and mapping[tag]:
             rs = db.GqlQuery('SELECT * FROM Entry WHERE id IN :1  ORDER BY created DESC', mapping[tag])
             entries = rs.fetch(10)
+            if not entries:
+                self.redirect('/error/')
+                return
             clouds = Tags().cloud()
             self.render('index.html', entries=entries, clouds=clouds, mapping=mapping)
         else:
             self.redirect('/')
+
+class ErrorHandler(BaseHandler):
+    def get(self):
+        self.render('error.html')
 
 class Application(tornado.wsgi.WSGIApplication):
     def __init__(self):
@@ -71,6 +81,7 @@ class Application(tornado.wsgi.WSGIApplication):
             (r"/", MainHandler),
             (r"/view/([0-9]+).html", ViewHandler),
             (r"/tags/([^/]+)?", TagsHandler),
+            (r"/error/", ErrorHandler),
         ]
         author = Author.all().get()
         settings = dict(
