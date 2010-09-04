@@ -92,7 +92,7 @@ class RemoveHandler(BaseHandler):
         rs = db.GqlQuery('SELECT * FROM Entry WHERE id = :1', int(id))
         entry = rs.get()
         db.delete(entry)
-        self.redirect('/writer/', author=self.get_author())
+        self.redirect('/writer/')
 
 class TwitterHandler(BaseHandler):
     @tornado.web.signin
@@ -256,7 +256,6 @@ class Application(tornado.wsgi.WSGIApplication):
             #xsrf_cookies = True,
             cookie_secret = "11oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o/Vo=",
             login_url = "/writer/signin/",
-            debug = True,
         )
         tornado.wsgi.WSGIApplication.__init__(self, handlers, **settings)
 

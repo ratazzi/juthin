@@ -58,6 +58,9 @@ class ViewHandler(BaseHandler):
 
 class TagsHandler(BaseHandler):
     def get(self, tag):
+        if not tag:
+            self.redirect('/error/')
+            return
         mapping = Tags().mapping()
         tag = url_unescape(tag)
         if tag in mapping and mapping[tag]:
@@ -82,6 +85,7 @@ class Application(tornado.wsgi.WSGIApplication):
             (r"/view/([0-9]+).html", ViewHandler),
             (r"/tags/([^/]+)?", TagsHandler),
             (r"/error/", ErrorHandler),
+            (r"/.*", ErrorHandler),
         ]
         author = Author.all().get()
         settings = dict(

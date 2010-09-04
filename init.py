@@ -20,8 +20,6 @@ class InitHandler(tornado.web.RequestHandler):
         author.blog_domain = u'blog domain'
         author.blog_timezone = 8
         author.sync_key = hashlib.md5('sync_key').hexdigest() # 通过 web service api 同步文章
-        author.twitter_user = '' # twitter_user
-        author.twitter_passwd = '' # twitter_passwd
         author.put()
         self.redirect('/writer/signin/')
 
