@@ -4,6 +4,10 @@ runtime: python
 api_version: 1
 
 handlers:
+- url: /robots.txt
+  static_files: robots.txt
+  upload: robots.txt
+
 - url: /favicon.ico
   static_files: static/favicon.ico
   upload: static/favicon.ico
@@ -17,7 +21,10 @@ handlers:
 - url: /writer/.*
   script: writer.py
 
-- url: /twitter/tweet/
+- url: /twitter/.*
+  script: writer.py
+
+- url: /oauth/twitter/callback/
   script: writer.py
 
 - url: /entry/sync/
