@@ -54,6 +54,7 @@ class ViewHandler(BaseHandler):
         else:
             related = []
         clouds = Tags().cloud()
+        self.settings['title'] = entry.title
         self.render('view.html', entry=entry, clouds=clouds, mapping=mapping, related=related)
 
 class TagsHandler(BaseHandler):
@@ -90,6 +91,7 @@ class Application(tornado.wsgi.WSGIApplication):
         author = Author.all().get()
         settings = dict(
             blog_title = author.blog_title,
+            title = '',
             blog_domain = author.blog_domain,
             blog_timezone = author.blog_timezone,
             blog_author = author.nickname,

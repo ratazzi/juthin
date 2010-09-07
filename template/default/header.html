@@ -2,7 +2,7 @@
 <html lang="zh-CN">
     <head>
         <meta charset="utf-8" />
-        <title>{{ escape(handler.settings["blog_title"]) }}</title>
+        <title>{{ escape(handler.settings["blog_title"]) }}{% if len(handler.settings['title']) > 0 %} › {{ handler.settings['title'] }}{% end %}</title>
         <!--<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
         <meta name="HandheldFriendly" content="True" />-->
         <link rel="alternate" type="application/rss+xml" title="{{ escape(handler.settings['blog_title']) }}" href="feed://feeds.feedburner.com/ratazzi" />
