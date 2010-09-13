@@ -15,3 +15,6 @@
 # under the License.
 
 """The Tornado web server and tools."""
+
+version = "1.1"
+version_info = (1, 1, 0)

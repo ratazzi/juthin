@@ -50,16 +50,18 @@ frameworks on the Tornado HTTP server and I/O loop. See WSGIContainer for
 details and documentation.
 """
 
-import cgi
 import cStringIO
-import escape
+import cgi
 import httplib
-import httputil
 import logging
 import sys
 import time
+import tornado
 import urllib
-import web
+
+from tornado import escape
+from tornado import httputil
+from tornado import web
 
 class WSGIApplication(web.Application):
     """A WSGI-equivalent of web.Application.
@@ -237,7 +239,7 @@ class WSGIContainer(object):
         if "content-type" not in header_set:
             headers.append(("Content-Type", "text/html; charset=UTF-8"))
         if "server" not in header_set:
-            headers.append(("Server", "TornadoServer/0.1"))
+            headers.append(("Server", "TornadoServer/%s" % tornado.version))
 
         parts = ["HTTP/1.1 " + data["status"] + "\r\n"]
         for key, value in headers:
@@ -293,4 +295,3 @@ class WSGIContainer(object):
         summary = request.method + " " + request.uri + " (" + \
             request.remote_ip + ")"
         log_method("%d %s %.2fms", status_code, summary, request_time)
-
