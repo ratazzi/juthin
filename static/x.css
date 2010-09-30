@@ -42,8 +42,10 @@ div.gist-file{
     font-size:11px;
     border:1px solid #DEDEDE;
     margin-bottom:1em;
+    border-radius:4px 4px 4px 4px;
     -moz-border-radius:4px 4px 4px 4px;
     -webkit-border-radius:4px 4px 4px 4px;
+    box-shadow:0 1px 5px rgba(0, 0, 0, 0.1);
     -moz-box-shadow:0 1px 5px rgba(0, 0, 0, 0.1);
     -webkit-box-shadow:0 1px 5px rgba(0, 0, 0, 0.1);
 }
@@ -74,8 +76,10 @@ div#sidebar {
 }
 
 div#main, div.sidebar, div#footer, div#header, div#error {
+    border-radius:5px;
     -moz-border-radius:5px;
     -webkit-border-radius:5px;
+    box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);
     -moz-box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);
     -webkit-box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);
     border:1px solid #ccc;
@@ -221,6 +225,7 @@ a.dotted:active{text-decoration:none;}
 a.dotted:hover{border-bottom:1px dotted #D0A825; color:#D0A825; text-decoration:none;}
 
 div.blank{
+    border-radius:5px;
     -moz-border-radius:5px;
     -webkit-border-radius:5px;
     border:2px solid #bbb;

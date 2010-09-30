@@ -2,8 +2,10 @@ div#main {
     width:69%;
     border:none;
     background:none;
+    border-radius:none;
     -moz-border-radius:none;
     -webkit-border-radius:none;
+    box-shadow:none;
     -moz-box-shadow:none;
     -webkit-box-shadow:none;
 }
@@ -17,8 +19,10 @@ div.block {
 }
 
 div.block, div#footer, div#header {
+    border-radius:5px;
     -moz-border-radius:5px;
     -webkit-border-radius:5px;
+    box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);
     -moz-box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);
     -webkit-box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);
     border:1px solid #ccc;
@@ -62,6 +66,7 @@ input.text {
 
 textarea, input.text {
     border:1px solid #ccc;
+    border-radius:3px 3px 3px 3px;
     -moz-border-radius:3px 3px 3px 3px;
     -webkit-border-radius:3px 3px 3px 3px;
     width:98.5%;
@@ -74,6 +79,7 @@ textarea, input.text {
 }
 
 textarea:focus, input.text:focus {
+    box-shadow:0 0 5px rgba(128, 128, 160, 0.5);
     -moz-box-shadow:0 0 5px rgba(128, 128, 160, 0.5);
     -webkit-box-shadow:0 0 5px rgba(128, 128, 160, 0.5);
     border:1px solid #CCCCCC;
@@ -101,6 +107,7 @@ input.super, input.button {
     padding: 4px 15px 4px 15px; 
     border: 1px solid rgba(0,0,0,.25); 
     border-bottom-color: rgba(0,0,0,.35); 
+    border-radius: 5px; 
     -webkit-border-radius: 5px; 
     -moz-border-radius: 5px; 
     border-radius: 5px; 
@@ -115,6 +122,7 @@ input.normal, input.button {
     text-shadow: 0px 1px 1px #fff; 
     text-decoration: none; 
     font-weight: bold; 
+    box-shadow: 0px 1px 3px rgba(66, 66, 77, 0.4); 
     -moz-box-shadow: 0px 1px 3px rgba(66, 66, 77, 0.4); 
     -webkit-box-shadow: 0px 1px 3px rgba(66, 66, 77, 0.4); 
 }
@@ -127,7 +135,9 @@ input.normal:hover, input.button:hover {
     text-decoration: none; 
     font-weight: bold; 
     cursor: pointer; 
+    box-shadow: 0px 1px 2px rgba(66, 66, 77, 0.2); 
     -webkit-box-shadow: 0px 1px 2px rgba(66, 66, 77, 0.2); 
+    -moz-box-shadow: 0px 1px 2px rgba(66, 66, 77, 0.2); 
 }
 
 input.normal:active, input.button:active { 
@@ -138,7 +148,9 @@ input.normal:active, input.button:active {
     text-decoration: none; 
     font-weight: bold; 
     cursor: pointer; 
+    box-shadow: 0px 1px 2px rgba(66, 66, 77, 0.2); 
     -moz-box-shadow: 0px 1px 2px rgba(66, 66, 77, 0.2); 
+    -webkit-box-shadow: 0px 1px 2px rgba(66, 66, 77, 0.2); 
 }
 
 table#entries {
