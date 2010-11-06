@@ -256,6 +256,7 @@ class Application(tornado.wsgi.WSGIApplication):
             #xsrf_cookies = True,
             cookie_secret = "11oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o/Vo=",
             login_url = "/writer/signin/",
+            debug = os.environ.get("SERVER_SOFTWARE", "").startswith("Development/"),
         )
         tornado.wsgi.WSGIApplication.__init__(self, handlers, **settings)
 

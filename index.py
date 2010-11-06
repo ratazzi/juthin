@@ -55,6 +55,7 @@ class ViewHandler(BaseHandler):
             related = []
         clouds = Tags().cloud()
         self.settings['title'] = entry.title
+        self.settings['keywords'] = entry.tags
         self.render('view.html', entry=entry, clouds=clouds, mapping=mapping, related=related)
 
 class TagsHandler(BaseHandler):
@@ -75,6 +76,14 @@ class TagsHandler(BaseHandler):
         else:
             self.redirect('/')
 
+class AtomHandler(BaseHandler):
+    def get(self):
+        rs = db.GqlQuery('SELECT * FROM Entry ORDER BY created DESC')
+        entries = rs.fetch(10)
+        clouds = Tags().cloud()
+        mapping = Tags().mapping()
+        self.render('atom.xml', entries=entries, clouds=clouds)
+
 class ErrorHandler(BaseHandler):
     def get(self):
         self.render('error.html')
@@ -85,6 +94,7 @@ class Application(tornado.wsgi.WSGIApplication):
             (r"/", MainHandler),
             (r"/view/([0-9]+).html", ViewHandler),
             (r"/tags/([^/]+)?", TagsHandler),
+            (r"/latest.rss", AtomHandler),
             (r"/error/", ErrorHandler),
             (r"/.*", ErrorHandler),
         ]
@@ -92,6 +102,7 @@ class Application(tornado.wsgi.WSGIApplication):
         settings = dict(
             blog_title = author.blog_title,
             title = '',
+            keywords = None,
             blog_domain = author.blog_domain,
             blog_timezone = author.blog_timezone,
             blog_author = author.nickname,
@@ -101,6 +112,7 @@ class Application(tornado.wsgi.WSGIApplication):
             #xsrf_cookies = True,
             cookie_secret = "11oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o/Vo=",
             login_url = "/writer/signin",
+            debug = os.environ.get("SERVER_SOFTWARE", "").startswith("Development/"),
         )
         tornado.wsgi.WSGIApplication.__init__(self, handlers, **settings)
 

@@ -29,8 +29,13 @@ div.block, div#footer, div#header {
     background-color:#fff;
 }
 
-div#tweet, div#tooltip, div#link_twitter {
+div#tweet, div#tooltip, div#link_twitter, div#todo {
     padding:10px;
+}
+
+div#todo {
+    padding-left:0px;
+    padding-right:0px;
 }
 
 div#tooltip li {
@@ -39,6 +44,21 @@ div#tooltip li {
     height:20px;
     line-height:160%;
     color:#333;
+}
+
+div#todo li {
+    line-height:180%;
+    font-size:13px;
+    border-bottom:1px solid #ccc;
+    padding:4px 0px 3px 0px;
+}
+
+div#todo li span {
+    margin-left:12px;
+}
+
+div#todo li input {
+    margin-left:20px;
 }
 
 div.cell {

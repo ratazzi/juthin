@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+<title>{{ escape(handler.settings["blog_title"]) }}</title>
+<subtitle>{{ escape(handler.settings["blog_title"]) }}</subtitle>
+<link rel="self" type="application/atom+xml" href="http://{{ handler.settings['blog_domain'] }}/latest.rss" />
+<id>http://{{ handler.settings['blog_domain'] }}/</id>
+<updated>{{ locale.format_time(entries[0].created, gmt_offset=handler.settings['blog_timezone'], fmt_string="%Y-%m-%dT%H:%M:%SZ") }}</updated>
+<rights>Copyright © 2010, {{ handler.settings['blog_domain'] }}</rights>
+{% for entry in entries %}
+<entry>
+    <title>{{ escape(entry.title) }}</title>
+
+    <link rel="alternate" type="text/html" href="http://{{ handler.settings['blog_domain'] }}/view/{{ entry.id }}.html" />
+    <id>tag:{{ handler.settings['blog_domain'] }},{{ locale.format_time(entry.created, gmt_offset=handler.settings['blog_timezone'], fmt_string="%Y-%m-%d") }}:/view/{{ entry.id }}.html</id>
+    <published>{{ locale.format_time(entry.created, gmt_offset=handler.settings['blog_timezone'], fmt_string="%Y-%m-%dT%H:%M:%SZ") }}</published>
+    <updated>{{ locale.format_time(entry.created, gmt_offset=handler.settings['blog_timezone'], fmt_string="%Y-%m-%dT%H:%M:%SZ") }}</updated>
+    <author>
+        <name>{{ handler.settings['blog_author'] }}</name>
+        <uri>http://{{ handler.settings['blog_domain'] }}/</uri>
+
+    </author>
+    <content type="html" xml:base="http://{{ handler.settings['blog_domain'] }}/" xml:lang="en"><![CDATA[
+    {{ entry.content }}
+    ]]></content>
+</entry>
+{% end %}
+</feed>

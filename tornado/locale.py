@@ -40,7 +40,7 @@ the locale.translate method will simply return the original string.
 """
 
 import csv
-import datetime
+import datetime,time
 import logging
 import os
 
@@ -332,11 +332,16 @@ class Locale(object):
                 "day": str(local_date.day),
             }
 
-    def format_time(self, date, gmt_offset=0):
+    def format_time(self, date, gmt_offset=0, fmt_string=None):
         if type(date) in (int, long, float):
             date = datetime.datetime.utcfromtimestamp(date)
+        else:
+            date = datetime.datetime.utcfromtimestamp(int(time.time()))
         local_date = date + datetime.timedelta(hours=gmt_offset)
-        return datetime.datetime.strftime(local_date, '%d-%b-%Y %H:%M')
+        if fmt_string == None:
+            return datetime.datetime.strftime(local_date, '%d-%b-%Y %H:%M')
+        else:
+            return datetime.datetime.strftime(local_date, fmt_string)
 
     def list(self, parts):
         """Returns a comma-separated list for the given list of parts.
