@@ -5,6 +5,7 @@ import os.path
 import re
 import sys,os
 import tornado.web
+from tornado.web import HTTPError
 import tornado.wsgi
 from tornado.escape import *
 from tornado.options import define, options
@@ -25,6 +26,9 @@ class BaseHandler(tornado.web.RequestHandler):
         else:
             return True
 
+    def get_error_html(self, status_code, **kwargs):
+        return open(self.get_template_path() + 'error.html').read()
+
 class MainHandler(BaseHandler):
     def get(self):
         rs = db.GqlQuery('SELECT * FROM Entry ORDER BY created DESC')
@@ -40,8 +44,7 @@ class ViewHandler(BaseHandler):
         mapping = Tags().mapping()
         entry = rs.get()
         if not entry:
-            self.redirect('/error/')
-            return
+            raise HTTPError(404)
         ids = []
         for tags in entry.tags:
             if tags in mapping:
@@ -61,16 +64,14 @@ class ViewHandler(BaseHandler):
 class TagsHandler(BaseHandler):
     def get(self, tag):
         if not tag:
-            self.redirect('/error/')
-            return
+            raise HTTPError(404)
         mapping = Tags().mapping()
         tag = url_unescape(tag)
         if tag in mapping and mapping[tag]:
             rs = db.GqlQuery('SELECT * FROM Entry WHERE id IN :1  ORDER BY created DESC', mapping[tag])
             entries = rs.fetch(10)
             if not entries:
-                self.redirect('/error/')
-                return
+                raise HTTPError(404)
             clouds = Tags().cloud()
             self.render('index.html', entries=entries, clouds=clouds, mapping=mapping)
         else:
@@ -85,8 +86,15 @@ class AtomHandler(BaseHandler):
         self.render('atom.xml', entries=entries, clouds=clouds)
 
 class ErrorHandler(BaseHandler):
-    def get(self):
-        self.render('error.html')
+    def __init__(self, application, request, status_code):
+        tornado.web.RequestHandler.__init__(self, application, request)
+        self.set_status(status_code)
+
+    """def get_error_html(self, status_code, **kwargs):
+        return open(self.get_template_path() + 'error.html').read()"""
+
+    def prepare(self):
+        raise HTTPError(self._status_code)
 
 class Application(tornado.wsgi.WSGIApplication):
     def __init__(self):
@@ -95,8 +103,6 @@ class Application(tornado.wsgi.WSGIApplication):
             (r"/view/([0-9]+).html", ViewHandler),
             (r"/tags/([^/]+)?", TagsHandler),
             (r"/latest.rss", AtomHandler),
-            (r"/error/", ErrorHandler),
-            (r"/.*", ErrorHandler),
         ]
         author = Author.all().get()
         settings = dict(
@@ -114,6 +120,8 @@ class Application(tornado.wsgi.WSGIApplication):
             login_url = "/writer/signin",
             debug = os.environ.get("SERVER_SOFTWARE", "").startswith("Development/"),
         )
+        tornado.web.RequestHandler = BaseHandler
+        tornado.web.ErrorHandler = ErrorHandler
         tornado.wsgi.WSGIApplication.__init__(self, handlers, **settings)
 
 def main():

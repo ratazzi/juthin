@@ -38,13 +38,6 @@ class BaseHandler(tornado.web.RequestHandler):
     def get_author(self):
         return Author.all().get()
 
-class OverviewHandler(BaseHandler):
-    @tornado.web.signin
-    def get(self):
-        rs = db.GqlQuery('SELECT * FROM Entry ORDER BY created DESC LIMIT 25')
-        entries = rs.fetch(25)
-        self.render('overview.html', entries=entries, author=self.get_author())
-
 class NewHandler(BaseHandler):
     @tornado.web.signin
     def get(self):
