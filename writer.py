@@ -60,6 +60,7 @@ class NewHandler(BaseHandler):
             entry.id = 1
         entry.created = int(time.time())
         entry.title = self.get_argument('title', default='', strip=True)
+        entry.slug = self.get_argument('slug', default='', strip=True)
         entry.tags = [item for item in self.get_argument('tags', default='', strip=True).split(',')]
         entry.content = markdown.markdown(self.get_argument('content', default='', strip=True))
         entry.hits = 0
@@ -80,6 +81,7 @@ class UpdateHandler(BaseHandler):
         rs = db.GqlQuery('SELECT * FROM Entry WHERE id = :1', id)
         entry = rs.get()
         entry.title = self.get_argument('title', default='', strip=True)
+        entry.slug = self.get_argument('slug', default='', strip=True)
         entry.tags = [item for item in self.get_argument('tags', default='', strip=True).split(',')]
         entry.content = markdown.markdown(self.get_argument('content', default='', strip=True))
         entry.lastmodify = int(time.time())
@@ -252,8 +254,6 @@ class Application(tornado.wsgi.WSGIApplication):
             blog_author = author.nickname,
             template_path = os.path.join(os.path.dirname(__file__), "template/writer"),
             static_path = os.path.join(os.path.dirname(__file__), "static"),
-            #ui_modules = {"Entry": EntryModule},
-            #xsrf_cookies = True,
             cookie_secret = "11oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o/Vo=",
             login_url = "/writer/signin/",
             debug = os.environ.get("SERVER_SOFTWARE", "").startswith("Development/"),

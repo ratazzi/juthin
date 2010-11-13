@@ -1,10 +1,11 @@
 html{
     font-family: "Luxi Sans", "Lucida Grande", Geneva, Verdana, sans;
     font-family: "Helvetica Neue","Luxi Sans",Tahoma,"STHeiti";
-    font-family: "Helvetica Neue","Luxi Sans","DejaVu Sans",Tahoma,"Hiragino Sans GB",STHeiti !important;
+    font-family: "Micsoft YaHei","Luxi Sans","DejaVu Sans",Tahoma,"Hiragino Sans GB",STHeiti !important;
     background-color:#e2e2e2; 
-    color:#333333;
-    font-size:13px;
+    color:#000000;
+    /*color:#333333;*/
+    font-size:14px;
     /*background-image:url("../images/s/bg.png");*/
 }
 
@@ -219,6 +220,8 @@ a.light:hover{color:#ccc; text-decoration:none; border:0;}
 
 a.var:link, a.var:active, a.var:visited{text-decoration: none; color:inherit;}
 a.var:hover{text-decoration:none;} 
+
+a.img:link, a.img:active, a.img:visited, a.img:hover {border:0;}
 
 a.dotted:link, a.dotted:visited{color:#40627C; border-bottom:1px dotted #40627C; text-decoration:none;}
 a.dotted:active{text-decoration:none;}

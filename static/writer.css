@@ -84,6 +84,11 @@ input.text {
     height:24px;
 }
 
+strong {
+    font-weight:bold;
+    color:#333;
+}
+
 textarea, input.text {
     border:1px solid #ccc;
     border-radius:3px 3px 3px 3px;

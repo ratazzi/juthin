@@ -8,6 +8,7 @@ class Entry(db.Model):
     uid = db.IntegerProperty()
     created = db.IntegerProperty()
     title = db.StringProperty()
+    slug = db.StringProperty()
     tags = db.StringListProperty()
     content = db.TextProperty()
     hits = db.IntegerProperty()
