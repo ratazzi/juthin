@@ -9,3 +9,5 @@ config.py
 google0db0ac42f4453db6.html
 sitemap.xml
 favicon.ico
+.DS_Store
+ratazzi.datastore

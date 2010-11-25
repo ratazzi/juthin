@@ -3,8 +3,8 @@
 
 import os.path
 import re
-import sys,os
-import datetime,time
+import sys, os
+import datetime, time
 import tornado.options
 import tornado.web
 import tornado.wsgi
@@ -228,7 +228,7 @@ class SignoutHandler(BaseHandler):
     def get(self):
         if self.get_secure_cookie('user'):
             self.clear_cookie('user')
-            self.redirect('/')
+            self.redirect('/')	
 
 class Application(tornado.wsgi.WSGIApplication):
     def __init__(self):

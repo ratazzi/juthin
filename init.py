@@ -16,10 +16,10 @@ class InitHandler(tornado.web.RequestHandler):
             author = Author()
             author.name = u'username'
             author.nickname = u'nickname'
-            author.passwd = hashlib.md5('password').hexdigest()
-            author.blog_title = u'blog title'
+            author.passwd = hashlib.md5('passwd').hexdigest()
+            author.blog_title = u'title'
             author.blog_theme = u'default'
-            author.blog_domain = u'blog domain'
+            author.blog_domain = u'localhost'
             author.blog_timezone = 8
             author.sync_key = hashlib.md5('sync_key').hexdigest() # 通过 web service api 同步文章
             author.put()
