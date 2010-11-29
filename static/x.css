@@ -2,6 +2,7 @@ html {
     font-family:"Luxi Sans", "Lucida Grande", Geneva, Verdana, sans;
     font-family:"Helvetica Neue","Luxi Sans",Tahoma,"STHeiti";
     font-family:"Micsoft YaHei","Luxi Sans","DejaVu Sans",Tahoma,"Hiragino Sans GB",STHeiti !important;
+    font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande",Helvetica,'Hiragino Sans GB',sans-serif;
     background-color:#e2e2e2; 
     color:#000000;
     /*color:#333333;*/
@@ -153,6 +154,7 @@ div#photos, div.post, div.related, div#writer {
 
 div.post p {
     margin-bottom:10px;
+	font-size:14px;
 }
 
 div.reply {
@@ -253,27 +255,27 @@ div#debug {
 }
 
 pre {
-  	width:auto;
-  	float:none;
-  	clear:none;
-  	font-size:14px;
-  	font-family:"Courier New",monospace,Consolas,Lucida Console;
-  	line-height:1.333;
-  	white-space:pre;
-  	color:#100;
-  	color:#333;
-  	border-left:1px solid #C2C9D1;
-  	padding-left:20px;
-  	margin:5px 0 1.5em 0;
-  	overflow:auto;
+    width:auto;
+    float:none;
+    clear:none;
+    font-size:14px;
+    font-family:"Courier New",monospace,Consolas,Lucida Console;
+    line-height:1.333;
+    white-space:pre;
+    color:#100;
+    color:#333;
+    border-left:1px solid #C2C9D1;
+    padding-left:20px;
+    margin:5px 0 1.5em 0;
+    overflow:auto;
 }
 
 /* IE FIX */
 pre {
-  	overflow-x:auto;
-  	overflow-y:hidden;
-  	padding-bottom:expression(this.scrollWidth > this.offsetWidth ? 15 : 0);
-  	width:100%;
+    overflow-x:auto;
+    overflow-y:hidden;
+    padding-bottom:expression(this.scrollWidth > this.offsetWidth ? 15 : 0);
+    width:100%;
 }
 
 div#error {
