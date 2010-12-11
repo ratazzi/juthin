@@ -1,0 +1,43 @@
+{% include 'header.html' %}
+
+            <div class="wrapper">
+                <div id="mainbody">
+                    <div id="main">
+                        {% for entry in entries %}
+                        <div class="post">
+                            <h2 class="entry-title"><a class="t" href="/view/{{ entry.id }}.html" title="{{ escape(entry.title) }}" rel="bookmark">{{ escape(entry.title) }}</a></h2>
+                            <div class="entry-meta">
+                                <span class="label">Tags:</span>
+                                <span class="tag-links">
+                                    {% for tag in entry.tags %}
+                                    <a href="/tags/{{ tag }}" class="tag" rel="tag">{{ tag }}</a>{% if tag != entry.tags[-1] %}<small class="sep">,</small>{% end %}
+                                    {% end %}
+                                </span>
+                            </div>
+                            <div class="entry-content">
+                                {{ entry.content }}
+                            </div>
+                            <div class="entry-meta align-right">
+                                <span class="author vcard">@{{ locale.format_time(entry.created, gmt_offset=handler.settings['blog_timezone']) }}</span><br>
+                            </div>
+                        </div>
+                        {% end %}
+                        <!--<div class="entry-related">
+                            <h3>Related Post</h3>
+                            <ul>
+                                <li><a href="#">rashost VPS 部署笔记</a></li>
+                                <li><a href="#">rashost VPS 部署笔记</a></li>
+                                <li><a href="#">rashost VPS 部署笔记</a></li>
+                                <li><a href="#">rashost VPS 部署笔记</a></li>
+                            </ul>
+                        </div>-->
+                    </div>
+
+                    {% include 'sidebar.html' %}
+
+                    <div style="clear:both;"></div>
+                </div>
+
+            </div>
+
+{% include 'footer.html' %}

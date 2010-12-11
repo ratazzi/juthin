@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8" />
+        <title>{{ escape(handler.settings["blog_title"]) }}{% if len(handler.settings['title']) > 0 %} › {{ handler.settings['title'] }}{% end %}</title>
+        {%if handler.settings['keywords'] %}
+        <meta name="keywords" content="{% for tag in handler.settings['keywords'] %}{{ tag }}{% if tag != handler.settings['keywords'][-1] %},{% end %}{% end%}" />
+        {% end %}
+        <link rel="alternate" type="application/atom+xml" title="{{ escape(handler.settings['blog_title']) }}" href="/latest.rss" />
+        <link rel="stylesheet" href="/static/reset.css" type="text/css">
+        <link rel="stylesheet" href="/static/juthin.css" type="text/css">
+        <link href="/static/favicon.ico" rel="shortcut icon" />
+    </head>
+    <body>
+        <div id="container">
+            <div class="wrapper" style="height:75px;background-color:#efefef;border-bottom:1px solid #dfdfdf;">
+                <div id="header">
+                    <h1><a href="/" class="img">{{ escape(handler.settings['blog_title']) }}</a></h1>
+                    {% if handler.get_current_user() %}
+                    <div id="nav">
+                        <a class="nav" href="/writer/">Writer</a><span class="chevron">&nbsp;&nbsp;</span>
+                        <a class="nav" href="/writer/settings/">Settings</a><span class="chevron">&nbsp;&nbsp;</span>
+                        <a class="nav" href="/writer/signout/">Sign Out</a>
+                    </div>
+                    {% end %}
+                </div>
+            </div>

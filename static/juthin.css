@@ -1,0 +1,196 @@
+div.wrapper {
+    width:100%;
+    margin:0;
+    background-color:#ffffff;
+}
+
+a {text-decoration:none; color:#476AB2;}
+a:hover {text-decoration:none; border-bottom:1px solid #476AB2;color:#476AB2;}
+
+a.img {text-decoration:none; border:0;}
+
+a.nav {text-decoration:none; color:#476AB2; margin:0 4px; padding:0 6px;}
+a.nav:hover {text-decoration:none; border-bottom:2px solid #476AB2;color:#476AB2;}
+
+a.t {text-decoration:none; color:#476AB2;}
+a.t:hover {text-decoration:none; border-bottom:2px solid #476AB2;}
+
+a.tag {
+    text-decoration:none; 
+    color:#bbb; 
+    font-size:13px;
+    font-family:Courier,Monaco,"Panic Sans","Luxi Mono";
+    margin-left:3px;
+}
+a.tag:hover {
+    text-decoration:none; 
+    border-bottom:1px dotted #333;
+    color:#333;
+}
+
+small.sep {
+    font-family:"Courier New",Monaco,"Panic Sans","Luxi Mono";
+}
+
+.align-right {
+    text-align:right;
+}
+
+div.gist {
+    margin:10px 0;
+}
+
+div.gist-file {
+    font-family:"Panic Sans","Menlo","DejaVu Sans Mono","Luxi Mono","Courier New",Monaco,"Hiragino Sans GB",STHeiti !important;
+    font-size:11px;
+    border:1px solid #DEDEDE;
+    margin-bottom:1em;
+    border-radius:4px 4px 4px 4px;
+    -moz-border-radius:4px 4px 4px 4px;
+    -webkit-border-radius:4px 4px 4px 4px;
+    box-shadow:0 1px 5px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow:0 1px 5px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow:0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+div#mainbody, div#header {
+    width:960px;
+    margin:0 auto;
+    height:100%;
+}
+    
+div#header {
+    padding:10px 5px 10px 5px;
+}
+
+div#header h1 {
+    font-family:"Courier New",Monaco,"Panic Sans","Luxi Mono";
+    font-size:42px;
+    font-weight:bold;
+    text-shadow:0.1em 0.1em 0.05em #C2C9D1;
+    color:#476AB2;
+    width:720px;
+    float:left;
+}
+
+div#nav {
+    float:left;
+    font-family:"Lucida Grande",Tahoma,Arial,sans-serif;
+    font-size:14px;
+    line-height:26px;
+    text-shadow:0 1px 0 #FFFFFF;
+    width:240px;
+}
+
+div#main, div#sidebar {
+    min-height:600px;
+    float:left;
+}
+
+div#main {
+    padding:10px 0 10px 0;
+    width:680px;
+}
+
+div.post {
+    margin-bottom:30px;
+}
+
+h2.entry-title {
+    font-family:"Graublau Web","Lucida Grande",Helvetica,'Hiragino Sans GB',sans-serif;
+    font-size:18px;
+    line-height:130%;
+    padding-bottom:10px;
+}
+
+div.entry-meta {
+    padding-bottom:8px;
+}
+
+span.label {
+    font-size:13px;
+    font-weight:bold;
+    color:#444444;
+}
+
+div.entry-meta span.author {
+    font-size:13px;
+    font-family:"Courier New",monospace,Consolas,Lucida Console;
+    color:gray;
+}
+
+div.entry-content {
+    font-size:14px;
+    /*font-family:"Micsoft YaHei","Lucida Grande",Helvetica,'Hiragino Sans GB',sans-serif;
+    font-family:"Helvetica Neue","Luxi Sans","DejaVu Sans",Tahoma,"Hiragino Sans GB",STHeiti !important;*/
+    font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande",Helvetica,'Hiragino Sans GB',sans-serif;
+    line-height:160%;
+    color:#444444;
+    padding-bottom:15px;
+    text-align:left;
+}
+
+div.entry-content pre {
+    border-left:1px solid #C2C9D1;
+    padding:5px 0px 5px 20px;
+    margin:5px 0px;
+    font-family:"Courier New",monospace,Consolas,Lucida Console;
+    overflow:auto;
+    white-space:pre;
+    width:auto;
+    font-size:14px;
+    line-height:130%;
+}
+
+div.entry-related {
+    margin-bottom:35px;
+}
+
+div.entry-related h3 {
+    color:#555555;
+    font-size:14px;
+    font-weight:bold;
+    font-family:"Luxi Sans","DejaVu Sans",Tahoma,"WenQuanYi Micro Hei",sans-serif;
+    line-height:150%;
+}
+
+div#sidebar {
+    width:235px;
+    margin-left:35px;
+    padding:10px 0px 10px 0px;
+}
+
+div#sidebar h3 {
+    color:#555555;
+    font-size:14px;
+    font-weight:bold;
+    font-family:"Luxi Sans","DejaVu Sans",Tahoma,"WenQuanYi Micro Hei",sans-serif;
+    line-height:150%;
+    border-bottom:1px solid #dadada;
+}
+
+div#sidebar ul, div.entry-related ul {
+    margin-bottom:12px;
+}
+
+div#sidebar li, div.entry-related li {
+    font-family:"Luxi Sans","DejaVu Sans",Tahoma,"WenQuanYi Micro Hei",sans-serif;
+    font-size:14px;
+    line-height:160%;
+    list-style:square;
+    margin:0 10px 0 14px;
+}
+
+div#sidebar li.first {margin-top:10px;}
+
+div#footer {
+    height:35px;
+    border-top:1px solid #dadada;
+    background-color:#eeeeee;
+    text-align:center;
+    padding-top:25px;
+    font-family:"Courier New",Monaco,"Panic Sans","Luxi Mono";
+    font-size:12px;
+    font-weight:bold;
+    color:#666666;
+}

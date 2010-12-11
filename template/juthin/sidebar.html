@@ -1,0 +1,16 @@
+                    <div id="sidebar">
+                        <!--<h3>Recent Post</h3>
+                        <ul id="recent">
+                            <li class="first"><a href="#">禁用 SSH 密码认证</a></li>
+                            <li><a href="#">禁用 SSH 密码认证</a></li>
+                            <li><a href="#">禁用 SSH 密码认证</a></li>
+                            <li class="last"><a href="#">禁用 SSH 密码认证</a></li>
+                        </ul>-->
+                        <h3>Tags</h3>
+                        <ul id="tags">
+                            {% for cloud in clouds %}
+                            <li {% if cloud == clouds[0] %}class="first"{% end %}{% if cloud == clouds[-1] %}class="last"{% end %}><a href="/tags/{{ escape(cloud) }}">{{ escape(cloud) }}</a></li>
+                            {% end %}
+                        </ul>
+                        <span id="hosted"><a target="_blank" href="http://code.google.com/appengine/"><img border="0" align="absmiddle" alt="Powered by Google App Engine" src="http://pic.yupoo.com/iweekly/Ar82qEas/MV2Mq.gif"></a></span>
+                    </div>
