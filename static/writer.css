@@ -128,7 +128,7 @@ div.settings label {
 }
 
 input.super, input.button {
-    background-image: url("../static/bg_blended.png"); 
+    background-image: url("../../static/bg_blended.png"); 
     padding:4px 15px 4px 15px; 
     border:1px solid rgba(0,0,0,.25); 
     border-bottom-color:rgba(0,0,0,.35); 

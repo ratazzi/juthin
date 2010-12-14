@@ -83,7 +83,7 @@ class AtomHandler(BaseHandler):
         entries = rs.fetch(10)
         clouds = Tags().cloud()
         mapping = Tags().mapping()
-        self.render('atom.xml', entries=entries, clouds=clouds)
+        self.render('../atom.xml', entries=entries, clouds=clouds)
 
 class ErrorHandler(BaseHandler):
     def __init__(self, application, request, status_code):
