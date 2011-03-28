@@ -27,7 +27,7 @@ class BaseHandler(tornado.web.RequestHandler):
             return True
 
     def get_error_html(self, status_code, **kwargs):
-        return open(self.get_template_path() + 'error.html').read()
+        return open(self.get_template_path() + '../error.html').read()
 
 class MainHandler(BaseHandler):
     def get(self):
@@ -122,7 +122,7 @@ class Application(tornado.wsgi.WSGIApplication):
         )
         tornado.web.RequestHandler = BaseHandler
         tornado.web.ErrorHandler = ErrorHandler
-        tornado.wsgi.WSGIApplication.__init__(self, handlers, **settings)
+        tornado.wsgi.WSGIApplication.__init__(self, handlers, **settings)     
 
 def main():
     wsgiref.handlers.CGIHandler().run(Application())

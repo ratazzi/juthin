@@ -142,6 +142,12 @@ div.entry-content pre {
     line-height:130%;
 }
 
+div.entry-content li {
+    list-style:square;
+    line-height:160%;
+    margin-left:30px;
+}
+
 div.entry-related {
     margin-bottom:35px;
 }

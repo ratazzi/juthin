@@ -1,3 +1,34 @@
+html {
+    font-family:"Luxi Sans", "Lucida Grande", Geneva, Verdana, sans;
+    font-family:"Helvetica Neue","Luxi Sans",Tahoma,"STHeiti";
+    font-family:"Micsoft YaHei","Luxi Sans","DejaVu Sans",Tahoma,"Hiragino Sans GB",STHeiti !important;
+    font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande",Helvetica,'Hiragino Sans GB',sans-serif;
+    background-color:#e2e2e2; 
+    color:#000000;
+    font-size:14px;
+}
+
+.sp {height:10px;}
+
+#doc {
+    margin:auto;
+    text-align:left;
+    width:73.07em;
+    *width:71.25em;
+    min-width:900px;
+}
+
+a {color:#0063dc; color:#cc6699; text-decoration:none;}
+a {color:#0063dc; text-decoration:none;}
+
+/* old #0063dc;*/
+a:link, a:active, a:visited {text-decoration:none; color:#476ab2;}
+a:hover {text-decoration:none; border-bottom:1px solid #476ab2;}
+
+a.img {text-decoration:none; border:0;} 
+
+h3 {font-size:16px; font-weight:bold;}
+
 div#main {
     width:69%;
     border:none;
@@ -18,7 +49,26 @@ div.block {
     margin-bottom:10px;
 }
 
-div.block, div#footer, div#header {
+div#footer {
+    text-align:center;
+    color:#999999;
+    font-family:"Courier New",Monaco,"Panic Sans","Luxi Mono";
+    font-size:10px;
+    font-weight:bold;
+    line-height:15px;
+    background-color:#fff;
+    padding:12px 0px 12px 0px;
+}
+
+div.blank {
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border:2px solid #bbb;
+}
+
+div.block, div#footer, div#header, div#error {
+    display:block;
     border-radius:5px;
     -moz-border-radius:5px;
     -webkit-border-radius:5px;
@@ -27,6 +77,35 @@ div.block, div#footer, div#header {
     -webkit-box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);
     border:1px solid #ccc;
     background-color:#fff;
+}
+
+div#header a.img {
+    float:left;
+}
+
+div#header {
+    min-height:80px;
+    padding:10px;
+}
+
+div#header a.img {
+    float:left;
+}
+
+div#header div.nav {
+    width:35%;
+    float:right;
+    text-align:right;
+    margin-right:35px;
+}
+
+div#header h1 {
+    font-size:42px;
+    font-weight:bold;
+    font-family:"Luxi Sans", "Lucida Grande", Geneva, Verdana, sans;
+    font-family:"Courier New",Monaco,"Panic Sans","Luxi Mono";
+    text-shadow:0.1em 0.1em 0.05em #C2C9D1;
+    display:inline;
 }
 
 div#tweet, div#tooltip, div#link_twitter, div#todo {
@@ -207,4 +286,39 @@ td.remove {
 
 small.tag {
     color:#999;
+}
+
+div#writer table {border:1px solid #bbb;}
+
+div#writer table th {
+    background-color:#bbb;
+}
+
+form#post label {
+    font-size:16px;
+}
+
+table.data tr {
+    height:35px;
+    border-bottom:1px solid #ccc;
+}
+
+tr.bug {height:35px;!important}
+
+#comments-list ol {margin-bottom:15px;}
+
+div#error {
+    margin:0 auto;
+    width:360px;
+    height:140px;
+    margin-top:240px;
+    padding:35px;
+}
+
+div#error h1 {
+    font-family:"Courier New",monospace,Consolas,Lucida Console;
+    font-size:24px;
+    color:#476AB2;
+    font-weight:bold;
+    margin-top:36px;
 }
