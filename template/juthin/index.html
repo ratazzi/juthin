@@ -15,7 +15,7 @@
                                 </span>
                             </div>
                             <div class="entry-content">
-                                {{ entry.content }}
+                                {{ markdown.markdown(entry.content) }}
                             </div>
                             <div class="entry-meta align-right">
                                 <span class="author vcard">@{{ locale.format_time(entry.created, gmt_offset=handler.settings['blog_timezone']) }}</span><br>

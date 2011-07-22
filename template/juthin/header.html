@@ -7,7 +7,7 @@
         <meta name="keywords" content="{% for tag in handler.settings['keywords'] %}{{ tag }}{% if tag != handler.settings['keywords'][-1] %},{% end %}{% end%}" />
         {% end %}
         <link rel="alternate" type="application/atom+xml" title="{{ escape(handler.settings['blog_title']) }}" href="/latest.rss" />
-        <link rel="stylesheet" href="/static/reset.css" type="text/css">
+        <link rel="stylesheet" href="{{ static_url('reset.css') }}" type="text/css">
         <link rel="stylesheet" href="/static/juthin.css" type="text/css">
         <link href="/static/favicon.ico" rel="shortcut icon" />
     </head>

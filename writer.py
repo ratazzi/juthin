@@ -10,7 +10,6 @@ import tornado.web
 import tornado.wsgi
 import wsgiref.handlers
 import unicodedata
-import markdown
 import hashlib
 from tornado.options import define, options
 from google.appengine.ext import db
@@ -62,7 +61,7 @@ class NewHandler(BaseHandler):
         entry.title = self.get_argument('title', default='', strip=True)
         entry.slug = self.get_argument('slug', default='', strip=True)
         entry.tags = [item for item in self.get_argument('tags', default='', strip=True).split(',')]
-        entry.content = markdown.markdown(self.get_argument('content', default='', strip=True))
+        entry.content = self.get_argument('content', default='', strip=True)
         entry.hits = 0
         entry.lastmodify = int(time.time())
         entry.put()
@@ -83,7 +82,7 @@ class UpdateHandler(BaseHandler):
         entry.title = self.get_argument('title', default='', strip=True)
         entry.slug = self.get_argument('slug', default='', strip=True)
         entry.tags = [item for item in self.get_argument('tags', default='', strip=True).split(',')]
-        entry.content = markdown.markdown(self.get_argument('content', default='', strip=True))
+        entry.content = self.get_argument('content', default='', strip=True)
         entry.lastmodify = int(time.time())
         db.put(entry)
         self.redirect('/writer/')
@@ -200,7 +199,7 @@ class EntrySyncHandler(BaseHandler):
         entry.created = int(self.get_argument('created'))
         entry.title = self.get_argument('title')
         entry.tags = [item for item in self.get_argument('tags').split(',')]
-        entry.content = markdown.markdown(self.get_argument('content'))
+        entry.content = self.get_argument('content')
         entry.hits = 0
         entry.lastmodify = int(self.get_argument('lastmodify'))
         entry.put()

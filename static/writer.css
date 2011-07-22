@@ -174,7 +174,6 @@ textarea, input.text {
     -moz-border-radius:3px 3px 3px 3px;
     -webkit-border-radius:3px 3px 3px 3px;
     width:98.5%;
-    line-height:120%;
     padding:3px;
     margin-bottom:15px;
     margin-top:5px;
@@ -257,6 +256,7 @@ input.normal:active, input.button:active {
 
 table#entries {
     margin:10px;
+    font-size:14px;
 }
 
 table#entries tr {

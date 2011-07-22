@@ -121,8 +121,6 @@ div.entry-meta span.author {
 
 div.entry-content {
     font-size:14px;
-    /*font-family:"Micsoft YaHei","Lucida Grande",Helvetica,'Hiragino Sans GB',sans-serif;
-    font-family:"Helvetica Neue","Luxi Sans","DejaVu Sans",Tahoma,"Hiragino Sans GB",STHeiti !important;*/
     font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande",Helvetica,"Hiragino Sans GB",sans-serif;
     line-height:160%;
     color:#444444;
@@ -133,13 +131,17 @@ div.entry-content {
 div.entry-content pre {
     border-left:1px solid #C2C9D1;
     padding:5px 0px 5px 20px;
-    margin:5px 0px;
+    margin:10px 0px;
     font-family:"Courier New",monospace,Consolas,"Lucida Console";
     overflow:auto;
     white-space:pre;
     width:auto;
     font-size:14px;
     line-height:130%;
+}
+
+div.entry-content ul {
+    margin:20px 0 20px 0;
 }
 
 div.entry-content li {
