@@ -12,6 +12,7 @@ from tornado.web import HTTPError
 from tornado.escape import *
 from tornado.options import define, options
 from juthin.core import Entry, Tags, Author
+from juthin import filters
 from google.appengine.ext import db
 from django.utils import simplejson
 
@@ -36,7 +37,7 @@ class MainHandler(BaseHandler):
         entries = rs.fetch(10)
         clouds = Tags().cloud()
         mapping = Tags().mapping()
-        self.render('index.html', entries=entries, clouds=clouds, markdown=markdown)
+        self.render('index.html', entries=entries, clouds=clouds, markdown=markdown, filter=filters)
 
 class ViewHandler(BaseHandler):
     def get(self, id):
@@ -61,6 +62,7 @@ class ViewHandler(BaseHandler):
         self.settings['title'] = entry.title
         self.settings['keywords'] = entry.tags
         entry.content = markdown.markdown(entry.content)
+        entry.content = filters.clly(entry.content)
         self.render('view.html', entry=entry, clouds=clouds, mapping=mapping, related=related)
 
 class TagsHandler(BaseHandler):
@@ -75,7 +77,7 @@ class TagsHandler(BaseHandler):
             if not entries:
                 raise HTTPError(404)
             clouds = Tags().cloud()
-            self.render('index.html', entries=entries, clouds=clouds, mapping=mapping, markdown=markdown)
+            self.render('index.html', entries=entries, clouds=clouds, mapping=mapping, markdown=markdown, filter=filters)
         else:
             self.redirect('/')
 

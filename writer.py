@@ -227,7 +227,7 @@ class SignoutHandler(BaseHandler):
     def get(self):
         if self.get_secure_cookie('user'):
             self.clear_cookie('user')
-            self.redirect('/')	
+            self.redirect('/')  
 
 class Application(tornado.wsgi.WSGIApplication):
     def __init__(self):
