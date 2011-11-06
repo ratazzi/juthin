@@ -209,3 +209,7 @@ div#footer {
     font-weight:bold;
     color:#666666;
 }
+
+embed[type="application/thunder_download_plugin"] {
+    display:none;
+}
