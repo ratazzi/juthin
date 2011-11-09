@@ -3,11 +3,11 @@
                 <span class="meta-sep">&nbsp;|&nbsp;</span><span>Copyright (C) 2010 Ratazzi</span>
             </div>
         </div>
-{% if not handler.settings['debug'] %}
+{% if not handler.settings['debug'] and handler.settings['ga_account'] %}
 <script type="text/javascript">
   var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-9840465-1']);
-  _gaq.push(['_setDomainName', 'www.ratazzi.org']);
+  _gaq.push(['_setAccount', '{{ handler.settings['ga_account'] }}']);
+  _gaq.push(['_setDomainName', '{{ handler.settings['blog_domain'] }}']);
   _gaq.push(['_trackPageview']);
   (function() {
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;

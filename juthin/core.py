@@ -24,6 +24,7 @@ class Author(db.Model):
     blog_title = db.StringProperty()
     blog_theme = db.StringProperty()
     blog_domain = db.StringProperty()
+    ga_account = db.StringProperty()
     blog_timezone = db.IntegerProperty()
     sync_key = db.StringProperty()
     twitter_oauth = db.IntegerProperty()

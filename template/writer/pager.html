@@ -1,0 +1,9 @@
+<div class="pagination" style="margin-left:8px;">
+    <ul>
+        <li class="prev"><a class="img" href="{{ pager.prev }}">← Prev</a></li>
+        {% for item in pager.items %}
+        <li{% if item['is_active'] %} class="active"{% end %}><a class="img" href="{{ item['url'] }}">{{ item['text'] }}</a></li>
+        {% end %}
+        <li class="next"><a class="img" href="{{ pager.next }}">Next →</a></li>
+    </ul>
+</div>

@@ -15,12 +15,17 @@
                 </div>
     
                 {% if entries %}
-                <table id="entries" width="95%" cellspacing="0" cellpadding="5" border="0">
+                <table id="entries" width="95%" cellspacing="0" cellpadding="5" border="0" class="zebra-striped">
+                    <thead>
+                        <tr>
+                            <td class="title">标题</td><td>日期</td><td>操作</td>
+                        </tr>
+                    </thead>
                     <tbody>
                     {% for entry in entries %}
-                    <tr class="{% if (entries.index(entry)%2 == 0) %}odd{% else %}even{% end %}">
+                    <tr class="{% if (entries.index(entry)%2 == 0) %}odd{% else %}even{% end %}" style="height:78px;">
                         <td class="title">
-                            <a href="/writer/update/{{ entry.id }}">{{ entry.title }}</a><br />
+                            <a href="/writer/update/{{ entry.id }}">{{ entry.title }}</a><br /><br />
                             {% for tag in entry.tags %}
                             <small class="tag">{{ tag }}</small>
                             {% end %}
@@ -32,6 +37,8 @@
                     </tbody>
                 </table>
                 {% end %}
+
+                {{ modules.Pager(pager) }}
     
             </div>
         </div>

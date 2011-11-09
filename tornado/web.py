@@ -1414,19 +1414,6 @@ def authenticated(method):
         return method(self, *args, **kwargs)
     return wrapper
 
-def signin(method):
-    """Decorate methods with this to require that the user be logged in."""
-    @functools.wraps(method)
-    def wrapper(self, *args, **kwargs):
-        if not self.get_current_user():
-            if self.request.method == "GET":
-                url = self.get_login_url()
-                self.redirect(url)
-                return
-            raise HTTPError(403)
-        return method(self, *args, **kwargs)
-    return wrapper
-
 class UIModule(object):
     """A UI re-usable, modular unit on a page.
 

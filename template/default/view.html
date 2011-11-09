@@ -7,7 +7,7 @@
             <div class="post">
                 <h2 class="entry-title"><a rel="bookmark" title="{{ escape(entry.title) }}" href="/view/{{ entry.id }}.html" class="t">{{ escape(entry.title) }}</a></h2>
                 <div class="entry-content">
-                    {{ entry.content }}
+                    {{ filter.apply(entry.content) }}
                 </div>
                 <div class="entry-meta">
                     <span class="author vcard">Posted by {{ handler.settings['blog_author'] }} on {{ locale.format_time(entry.created, gmt_offset=handler.settings['blog_timezone']) }}</span><br>

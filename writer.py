@@ -17,10 +17,26 @@ from django.utils import simplejson
 from google.appengine.api import memcache
 
 from juthin.core import Entry, Tags, Author
+from juthin.helpers import Pager, PagerModule
 
 from twitter.oauthtwitter import OAuthApi
 from twitter.oauth import OAuthToken
 import config
+import logging
+import functools
+
+def authenticated(method):
+    """Decorate methods with this to require that the user be logged in."""
+    @functools.wraps(method)
+    def wrapper(self, *args, **kwargs):
+        if not self.get_current_user():
+            if self.request.method == "GET":
+                url = self.get_login_url()
+                self.redirect(url)
+                return
+            raise tornado.web.HTTPError(403)
+        return method(self, *args, **kwargs)
+    return wrapper
 
 class BaseHandler(tornado.web.RequestHandler):
     @property
@@ -38,18 +54,21 @@ class BaseHandler(tornado.web.RequestHandler):
         return Author.all().get()
 
 class OverviewHandler(BaseHandler):
-    @tornado.web.signin
+    @authenticated
     def get(self):
-        rs = db.GqlQuery('SELECT * FROM Entry ORDER BY created DESC LIMIT 25')
-        entries = rs.fetch(25)
-        self.render('overview.html', entries=entries, author=self.get_author())
+        page = int(self.get_argument('page', 1))
+        rs = db.GqlQuery('SELECT * FROM Entry ORDER BY created DESC')
+        total = rs.count()
+        pager = Pager(page, total, 10)
+        entries = rs.fetch(limit=10, offset=pager.offset)
+        self.render('overview.html', entries=entries, author=self.get_author(), pager=pager)
 
 class NewHandler(BaseHandler):
-    @tornado.web.signin
+    @authenticated
     def get(self):
         self.render('new.html', author=self.get_author())
 
-    @tornado.web.signin
+    @authenticated
     def post(self):
         last = Entry.all().order('-created').get()
         entry = Entry()
@@ -68,13 +87,13 @@ class NewHandler(BaseHandler):
         self.redirect('/writer/')
 
 class UpdateHandler(BaseHandler):
-    @tornado.web.signin
+    @authenticated
     def get(self, id):
         rs = db.GqlQuery('SELECT * FROM Entry WHERE id = :1', int(id))
         entry = rs.get()
         self.render('update.html', entry=entry, author=self.get_author())
 
-    @tornado.web.signin
+    @authenticated
     def post(self, id):
         id = int(id)
         rs = db.GqlQuery('SELECT * FROM Entry WHERE id = :1', id)
@@ -88,7 +107,7 @@ class UpdateHandler(BaseHandler):
         self.redirect('/writer/')
 
 class RemoveHandler(BaseHandler):
-    @tornado.web.signin
+    @authenticated
     def get(self, id):
         rs = db.GqlQuery('SELECT * FROM Entry WHERE id = :1', int(id))
         entry = rs.get()
@@ -96,7 +115,7 @@ class RemoveHandler(BaseHandler):
         self.redirect('/writer/')
 
 class TwitterHandler(BaseHandler):
-    @tornado.web.signin
+    @authenticated
     def post(self):
         status = self.get_argument('status')
         author = Author.all().get()
@@ -105,12 +124,16 @@ class TwitterHandler(BaseHandler):
             twitter = OAuthApi(config.CONSUMER_KEY, config.CONSUMER_SECRET, access_token)
             try:
                 twitter.PostUpdate(status.encode('utf-8'))
+                user = twitter.GetUserInfo()
+                author.twitter_profile_image_url = user.profile_image_url
+                author.twitter_name = user.name
+                db.put(author)
             except:
                 logging.error('Failed to tweet: ' + status)
         self.redirect('/writer/')
 
 class TwitterLinkHandler(BaseHandler):
-    @tornado.web.signin
+    @authenticated
     def get(self):
         twitter = OAuthApi(config.CONSUMER_KEY, config.CONSUMER_SECRET)
         request_token = twitter.getRequestToken()
@@ -120,7 +143,7 @@ class TwitterLinkHandler(BaseHandler):
         self.redirect(authorization_url)
 
 class TwitterCallbackHandler(BaseHandler):
-    @tornado.web.signin
+    @authenticated
     def get(self):
         request_token = memcache.get('request_token')
         twitter = OAuthApi(config.CONSUMER_KEY, config.CONSUMER_SECRET, request_token)
@@ -147,12 +170,12 @@ class TwitterCallbackHandler(BaseHandler):
         self.redirect('/writer/settings/')
 
 class SettingsHandler(BaseHandler):
-    @tornado.web.signin
+    @authenticated
     def get(self):
         author = Author.all().get()
         self.render('settings.html', author=author)
 
-    @tornado.web.signin
+    @authenticated
     def post(self):
         author = Author.all().get()
         if not author:
@@ -163,6 +186,7 @@ class SettingsHandler(BaseHandler):
         author.blog_title = self.get_argument('blog_title', default='', strip=True)
         author.blog_theme = self.get_argument('blog_theme', default='default', strip=True)
         author.blog_domain = self.get_argument('blog_domain', default='', strip=True)
+        author.ga_account = self.get_argument('ga_account', default='', strip=True)
         author.blog_timezone = int(self.get_argument('blog_timezone', default=0, strip=True))
         author.sync_key = self.get_argument('sync_key', default='', strip=True)
         author.twitter_user = self.get_argument('twitter_user', default='', strip=True)
@@ -171,7 +195,7 @@ class SettingsHandler(BaseHandler):
         self.redirect('/writer/')
 
 class PasswdHandler(BaseHandler):
-    @tornado.web.signin
+    @authenticated
     def post(self):
         author = Author.all().get()
         new_passwd = self.get_argument('new_passwd')
@@ -229,6 +253,27 @@ class SignoutHandler(BaseHandler):
             self.clear_cookie('user')
             self.redirect('/')  
 
+class JsonHandler(BaseHandler):
+    def get(self, id):
+        id = int(id)
+        rs = db.GqlQuery('SELECT * FROM Entry WHERE id = :1', id)
+        mapping = Tags().mapping()
+        entry = rs.get()
+        if not entry:
+            raise HTTPError(404)
+        data = {'title':entry.title, 'id':entry.id, 'created':entry.created, 'content':entry.content, 'lastmodify':entry.lastmodify, 'tags':entry.tags}
+        self.write(simplejson.dumps(data))
+
+class BackupHandler(BaseHandler):
+    def get(self):
+        self.set_header('Content-Type', 'text/plain; charset=utf-8')
+        rs = db.GqlQuery('SELECT * FROM Entry')
+        self.write('#!/bin/bash\n')
+        self.write('#total: %d\n' % rs.count())
+        entries = rs.fetch(1000)
+        for entry in entries:
+            self.write('wget http://%s/writer/json/%d.json\n' % (self.settings['blog_domain'], entry.id))
+
 class Application(tornado.wsgi.WSGIApplication):
     def __init__(self):
         handlers = [
@@ -240,6 +285,8 @@ class Application(tornado.wsgi.WSGIApplication):
             (r"/writer/passwd/", PasswdHandler),
             (r"/writer/signin/", SigninHandler),
             (r"/writer/signout/", SignoutHandler),
+            (r"/writer/json/([0-9]+).json", JsonHandler),
+            (r"/writer/backup/", BackupHandler),
             (r"/twitter/tweet/", TwitterHandler),
             (r"/twitter/link/", TwitterLinkHandler),
             (r"/oauth/twitter/callback/", TwitterCallbackHandler),
@@ -255,6 +302,7 @@ class Application(tornado.wsgi.WSGIApplication):
             static_path = os.path.join(os.path.dirname(__file__), "static"),
             cookie_secret = "11oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o/Vo=",
             login_url = "/writer/signin/",
+            ui_modules = {'Pager':PagerModule},
             debug = os.environ.get("SERVER_SOFTWARE", "").startswith("Development/"),
         )
         tornado.wsgi.WSGIApplication.__init__(self, handlers, **settings)

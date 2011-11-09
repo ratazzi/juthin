@@ -15,22 +15,13 @@
                                 </span>
                             </div>
                             <div class="entry-content">
-                                {{ filter.clly(markdown.markdown(entry.content)) }}
+                                {{ filter.apply(entry.content) }}
                             </div>
                             <div class="entry-meta align-right">
                                 <span class="author vcard">@{{ locale.format_time(entry.created, gmt_offset=handler.settings['blog_timezone']) }}</span><br>
                             </div>
                         </div>
                         {% end %}
-                        <!--<div class="entry-related">
-                            <h3>Related Post</h3>
-                            <ul>
-                                <li><a href="#">rashost VPS 部署笔记</a></li>
-                                <li><a href="#">rashost VPS 部署笔记</a></li>
-                                <li><a href="#">rashost VPS 部署笔记</a></li>
-                                <li><a href="#">rashost VPS 部署笔记</a></li>
-                            </ul>
-                        </div>-->
                     </div>
 
                     {% include 'sidebar.html' %}

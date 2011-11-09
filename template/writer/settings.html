@@ -10,13 +10,15 @@
                         <a href="/writer/">Writer</a> <span class="chevron">&nbsp;›&nbsp;</span> 设置 
                     </span>
                 </div>
-                <form id="post" action="/writer/settings/" method="post">
+                <form id="settings-form" action="/writer/settings/" method="post">
                     <label>博客标题</label>
                     <input class="text" name="blog_title" type="text" value="{% if author %}{{ author.blog_title }}{% end %}" /><br />
                     <label>博客主题</label>
                     <input class="text" name="blog_theme" type="text" value="{% if author %}{{ author.blog_theme }}{% end %}" /><br />
                     <label>域名</label>
                     <input class="text" name="blog_domain" type="text" value="{% if author %}{{ author.blog_domain }}{% end %}" /><br />
+                    <label>Google 统计帐号</label>
+                    <input class="text" name="ga_account" type="text" value="{% if author %}{{ author.ga_account }}{% end %}" /><br />
                     <label>时区</label>
                     <input class="text" name="blog_timezone" type="text" value="{% if author %}{{ author.blog_timezone }}{% end %}" /><br />
                     <label>Sync Key</label>
@@ -30,10 +32,10 @@
                 <div class="sp"></div>
                 <div class="cell">
                     <span class="fade">
-                        <a href="/writer/">Writer</a> <span class="chevron">&nbsp;›&nbsp;</span> 更改密码<small>（不更改请留空）</small> 
+                        <a href="/writer/">Writer</a> <span class="chevron">&nbsp;›&nbsp;</span> 更改密码<small style="font-size:12px;">（不更改请留空）</small> 
                     </span>
                 </div>
-                <form id="post" action="/writer/passwd/" method="post">
+                <form id="passwd-form" action="/writer/passwd/" method="post">
                     <label>新密码</label>
                     <input class="text" name="new_passwd" type="password" value="" /><br />
                     <label>确认密码</label>

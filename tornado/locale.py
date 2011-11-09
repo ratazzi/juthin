@@ -339,7 +339,8 @@ class Locale(object):
             date = datetime.datetime.utcfromtimestamp(int(time.time()))
         local_date = date + datetime.timedelta(hours=gmt_offset)
         if fmt_string == None:
-            return datetime.datetime.strftime(local_date, '%d-%b-%Y %H:%M')
+            return datetime.datetime.strftime(local_date, '%a %b %d %H:%M %Z %Y')
+            #return datetime.datetime.strftime(local_date, '%d-%b-%Y %H:%M')
         else:
             return datetime.datetime.strftime(local_date, fmt_string)
 

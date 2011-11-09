@@ -1,4 +1,9 @@
+#!/usr/bin/env python
+# encoding=utf-8
+
 import re
+from markdown import markdown
+filters = []
 
 def imgly(content):
     imgs = re.findall('(http://img.ly/[a-zA-Z0-9]+)\s?', content)
@@ -10,6 +15,7 @@ def imgly(content):
         return content
     else:
         return content
+filters.append(imgly)
 
 def clly(content):
     imgs = re.findall('(http://cl.ly/[a-zA-Z0-9]+)\s?', content)
@@ -21,3 +27,16 @@ def clly(content):
         return content
     else:
         return content
+filters.append(clly)
+
+# github gist script support
+def gist(value):
+    return re.sub(r'(http://gist.github.com/[\d]+)', r'<script src="\1.js"></script>', value)
+filters.append(gist)
+
+filters.append(markdown)
+
+def apply(content):
+    for filter in filters:
+        content = filter(content)
+    return content

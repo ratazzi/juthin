@@ -4,8 +4,13 @@ html {
     font-family:"Micsoft YaHei","Luxi Sans","DejaVu Sans",Tahoma,"Hiragino Sans GB",STHeiti !important;
     font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande",Helvetica,'Hiragino Sans GB',sans-serif;
     background-color:#e2e2e2; 
+    background-image:url('/static/white_sand.png');
     color:#000000;
     font-size:14px;
+}
+
+body {
+    background-image:url('/static/white_sand.png');
 }
 
 .sp {height:10px;}
@@ -15,6 +20,7 @@ html {
     text-align:left;
     width:73.07em;
     *width:71.25em;
+    width:960px;
     min-width:900px;
 }
 
@@ -45,6 +51,18 @@ div#sidebar {
     width:30%;
 }
 
+div#sidebar ul {
+    margin:0;
+}
+
+ul.xoxo td {
+    padding:0;
+}
+
+li#hosted {
+    margin-top:15px;
+}
+
 div.block {
     margin-bottom:10px;
 }
@@ -53,7 +71,7 @@ div#footer {
     text-align:center;
     color:#999999;
     font-family:"Courier New",Monaco,"Panic Sans","Luxi Mono";
-    font-size:10px;
+    font-size:12px;
     font-weight:bold;
     line-height:15px;
     background-color:#fff;
@@ -72,8 +90,8 @@ div.block, div#footer, div#header, div#error {
     border-radius:5px;
     -moz-border-radius:5px;
     -webkit-border-radius:5px;
-    box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow:0 2px 2px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow:0 2px 2px rgba(0, 0, 0, 0.15);
     -webkit-box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);
     border:1px solid #ccc;
     background-color:#fff;
@@ -94,12 +112,14 @@ div#header a.img {
 
 div#header div.nav {
     width:35%;
+    font-size:14px;
     float:right;
     text-align:right;
     margin-right:35px;
 }
 
 div#header h1 {
+    color:#476AB2;
     font-size:42px;
     font-weight:bold;
     font-family:"Luxi Sans", "Lucida Grande", Geneva, Verdana, sans;
@@ -142,6 +162,7 @@ div#todo li input {
 
 div.cell {
     padding:5px 10px 5px 10px;
+    font-size:16px;
     border-bottom:1px solid #ccc;
     margin-bottom:15px;
 }
@@ -201,6 +222,7 @@ div.settings label {
     display:block;
     width:20%;
     float:left;
+    font-size:16px;
     padding:10px 10px 0px 0px;
     text-align:right;
 }
@@ -255,6 +277,10 @@ input.normal:active, input.button:active {
 }
 
 table#entries {
+    font-size:14px;
+}
+
+/*table#entries {
     margin:10px;
     font-size:14px;
 }
@@ -265,27 +291,25 @@ table#entries tr {
 
 table#entries tr.even {
     background-color:#f9F9F9;
-}
+}*/
+
 
 td.title {
-    padding-left:5px;
+    padding-left:20px;
+    width:66%;
 }
 
-td.title {
-    width:76%;
+td.title a {
+    font-size:16px;
 }
 
 td.created {
-    width:20%;
     color:#999;
-}
-
-td.remove {
-    width:3%;
 }
 
 small.tag {
     color:#999;
+    font-size:13px;
 }
 
 div#writer table {border:1px solid #bbb;}
@@ -294,8 +318,15 @@ div#writer table th {
     background-color:#bbb;
 }
 
-form#post label {
+table#entries thead {
+    color:#333;
     font-size:16px;
+}
+
+form#post label {
+    width:auto;
+    font-size:16px;
+    text-align:left;
 }
 
 table.data tr {
